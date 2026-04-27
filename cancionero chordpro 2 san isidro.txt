@@ -1,0 +1,1082 @@
+﻿(ChordPro) de cancionero Iglesia Adventista Central San Isidro. Stgo - Chile
+Conjunto de adoración.
+2026
+
+
+
+
+{title: 1. Tu Poder}
+{key: G}
+
+
+{comment: G, D, C, C x2}
+
+
+{start_of_verse}
+[G]Queremos h[D]oy pe[C]dir Señ[G]or, tu po[D]der.. [C]tu pod[G]er.
+[G]No hay otra [D]forma [C]de avan[G]zar: tu po[D]der.. [C]tu pod[G]er.
+{end_of_verse}
+
+
+{start_of_chorus}
+Con tu po[D]der[C], nos haremos fue[G]rtes.
+Con tu p[D]ode[C]r, vamos a ven[G]cer.
+En tu p[D]oder[C].. está nuestra [Em]es.. [D]pe.. r[C]anza.
+[Am]Envía t[D]u pod[G]er.
+{end_of_chorus}
+
+
+{comment: INTERLUDIO G, D, C, C}
+
+
+{start_of_verse}
+[G]Estamos [D]tan can[C]sados [G]ya, oh Señ[D]or.. [C]danos pod[G]er.
+[G]Renueva nu[G]estro c[C]oraz[G]ón. Con p[D]oder.. d[C]anos pod[G]er.
+{end_of_verse}
+
+
+{start_of_chorus}
+Con tu po[D]der[C], nos haremos fue[G]rtes.
+Con tu p[D]oder[C], vamos a ven[G]cer.
+En tu p[D]oder[C].. está nuestra [Em]es.. p[D]e.. r[C]anza.
+[Am]Envía t[D]u po[G]der.          
+{end_of_chorus}
+
+
+{comment: CORO UP (A)}
+
+
+{start_of_chorus}
+Con tu po[E]der, [D]nos haremos fue[A]rtes.
+Con tu p[E]oder[D], vamos a venc[A]er.
+En tu p[E]oder[A], está nuestra [F#m]es..p[E]e..ra[D]nza. Env[Bm]ía tu[E] pod[(Bm)]er. [A]     
+{end_of_chorus}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{title: 2. Volverá}
+{key: C}
+
+
+{comment: INTRO: C Am Dm G x2}
+
+
+{start_of_verse}
+No me imp[C]orta lo que diga la [Am]gente, no me imp[Dm]orta lo que digan de [G]mí.
+Sop[C]orta un poquito m[Am]ás, qu[Dm]e Jesucristo ya vie[G]ne.
+De[C]bes estar prepa[Am]rado, p[Dm]orque El ha promet[G]ido volver y así lo h[C]ará. [C7]  
+{end_of_verse}
+
+
+{start_of_chorus}
+Volver[F]á, volver[G]á Jes[E]ús volve[Am]rá El ven[F]drá otra [G]vez por ti y po[C]r m[C7]i
+Volve[F]rá, volver[G]á Jes[E]ús volver[Am]á El ven[F]drá otra [G]vez por ti y po[C]r [/F]mi[/C].    
+{end_of_chorus}
+
+
+{start_of_verse}
+[C]Hambre dolor y pestil[Am]encias gu[Dm]erras y rumores de gu[G]erras
+Se han le[C]vantado falsos pro[Am]fetas dici[Dm]endo que son “el cr[G]isto”
+Pr[C]onto acabar[Am]á Porqu[Dm]e El ha promet[G]ido volver y así lo ha[C]rá  [C7]  
+{end_of_verse}
+
+
+
+
+
+
+{title: 3. Fe En Fuego}
+{key: D}
+
+
+{comment: INTRO: D G D A x2}
+
+
+{start_of_verse}
+Una b[D]raza hay prof[G]unda en mi solo es [D]una llamit[A]a
+Sigue m[D]i fe, fuerte y creci[G]endo y no tardar[D]á u[A]n incendio en ard[D]er[G].[D]     
+{end_of_verse}
+
+
+{start_of_chorus}
+Encend[A]er mi f[D]e mi anh[G]elo [D]es haz de m[Bm]i p[D]ura y Santa llam[A]a
+Todos p[A]odrán [D]ver, que hay un f[G]uego en [D]mi encend[Bm]ido [D]por Tu nombre y po[A]der,
+Comienza ard[Em]er [G]enciende mi f[A]e, Fe en fu[D]ego[G]  [D]  
+{end_of_chorus}
+
+
+{start_of_verse}
+Si tomando un v[D]ela, enciendes [G]otra y esa [D]otra, hace [A]igual
+Al tú not[D]arlo, el mundo lo m[G]ostrará, Arder[D]á, brillar[A]á con la Santa ll[D]am[G]a [D]   
+{end_of_verse}
+
+
+{comment: INTERLUDIO}
+[C]Nuestro mensaje al [G]mundo hay que dar[A]. Enciendan hombres, mujeres, niñas, niños.
+
+
+
+
+
+
+
+
+
+
+{title: 4. La Sangre De Cristo Jesús}
+{key: A}
+
+
+{comment: INTRO: // A D E D X2}
+
+
+{comment: I y II}
+{start_of_verse}
+Con la ofr[A]enda de [D]amor del Cord[E]ero y Su s[A]angre verti[D]da por m[E]i  
+Me h[C]a perdon[F]ado de [Am]toda mald[G]ad con [F]ella me di[C]o liberta[E]d
+No ex[A]isten ca[D]denas a[E]tándom[A]e por gr[A]acia de [D]mi Salvad[E]or
+El pr[F#m]ecio p[E]ago por mi s[D]alvaci[A]ón de su m[D]uerte me di[E]o redenci[A]ón.
+{end_of_verse}
+
+
+{comment: CORO I y II}
+{start_of_chorus}
+La s[A]angre de Cristo Je[D]sús[E] la[A]vó mi pecado en la [D]cruz [E]   
+[F#m]Vi....[E]da et[D]erna me d[A]a, [D]un día regresa[G]rá [E]    
+La s[A]angre de Cristo Je[D]sús[E] l[A]impia mi vida y me mu[D]estra Su l[E]uz
+[F#m]Dios es a[E]mor, no hay pru[D]eba mayo[A]r, La s[D]angre de C[E]risto Jes[A]ús [//]    
+{end_of_chorus}
+
+
+{comment: CORO III (UP)}
+{start_of_chorus}
+La s[A#]angre de Cristo Je[D#]sús[F] la[A#]vó mi pecado en la cr[D#]uz [F]     
+[G#m]Vi.....d[F]a et[D#]erna me [A#]da, u[D#]n día regresa[G#]rá  [F]   
+La s[A#]angre de Cristo Je[D#]sús[F] [A#]limpia mi vida y me mue[D#]stra Su [F]luz
+[G#m]Dios es am[F]or, no hay pru[D#]eba mayo[A#]r, La s[D#]angre de Cr[F]isto Jes[G#m]ús.
+{end_of_chorus}
+
+
+{start_of_verse}
+La [D#]sangre de Cr[F]isto Jes[G#m]ús x2  
+La [D#]sangre de Cr[F]isto Jes[A#]ús
+{end_of_verse}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{title: 5. Puedo Confiar En El Señor}
+{key: E}
+
+
+{comment: INTRO: E - C#m - A - B x2 E - A - E}
+
+
+{comment: I}
+{start_of_verse}
+Puedo Confi[E]ar en el Señor, que me va a gui[B]ar
+Puedo confi[F#m]ar en el Señor, no me va a fall[E]ar[A]. [E]    
+Si el sol lleg[E]ara a oscurec[E7]er y no brille m[A]ás
+Yo igual conf[B]ío en el Señor[A], no me va a falla[E]r.[A]  [E]   
+{end_of_verse}
+
+
+{start_of_chorus}
+Puedo descans[B]ar, puedo descans[E]ar
+en una mansi[B]ón, Cristo me dar[E]á[A]  [E]   
+Si el sol llega[E]ra a oscurecer[E7] y no brille m[A]ás [(Am)]    
+Yo igual conf[B]ío en el Señ[A]or, no me va a fal[E]lar[A]. [E]    
+{end_of_chorus}
+
+
+
+
+
+
+{title: 6. Purifícame}
+{key: B}
+
+
+{comment: INTRO: B, E, B, E, Em}
+
+
+{comment: I}
+{start_of_verse}
+Hoy me ac[B]erco a tu tr[E]ono mi Señ[B]or, quiero entr[E]ar en el Santu[F#]ario Celesti[B]al.
+Dónde est[E]á mi abog[F#]ado interces[B]or, Jesucr[E]isto quien min[F#]istra allí por [B]mi.
+{end_of_verse}
+
+
+{comment: II}
+{start_of_verse}
+Que mi o[B]ración asci[E]enda ante tu alt[B]ar, como in[E]cienso agra[F#]dable a ti Señ[B]or.
+Que mi v[B]ida entera [F#]tu puedas cam[B]biar,[G#m]  por la graci[C#m]a y la justic[F#7]ia de tu am[B]or.
+{end_of_verse}
+
+
+{start_of_chorus}
+Purifícam[E]e, con la s[F#]angre del Cordero Redent[B]or.
+Que la paz de D[E]ios, llene mi [F#]alma entera y mi coraz[B]ón.
+Jesucristo mora en [C#m]mí, [f#]     quiero hacer tu voluntad.
+{end_of_chorus}
+
+
+{comment: III}
+{start_of_verse}
+En el juicio ante el trono celestial, ya no mires mi pecado y mi maldad
+Solo veas a Jesús en mi lugar, que me ayuda en mi gran necesidad
+{end_of_verse}
+
+
+{comment: IV}
+{start_of_verse}
+Que el perdón que solo tu me puedes dar, que me acepta y me ama como soy,
+Me transforme por la gracia de Jesús, y tu ley en mi vivir pueda grabar.
+{end_of_verse}
+
+
+
+
+
+
+
+
+
+
+{title: 7. Dios Tu Nombre Exaltaré}
+{key: F#}
+
+
+{comment: INTRO: F# B D# x2}
+
+
+{comment: I y II}
+{start_of_verse}
+[F#]Dios, tu n[B]ombre exalta[D#]ré, [F#] pues yo [B]canto tus bon[D#]dades
+[F#]Yo con[B]tigo soy fe[D]liz, [F#]te doy gr[B]acias por salv[D#]arme
+{end_of_verse}
+
+
+{comment: CORO I y II}
+{start_of_chorus}
+[F#]Del cielo v[B]iniste [D#]tú, a r[B]edimir
+[F#]Desde la t[B]ierra a la cr[D#]uz, a p[B]erdonar
+[F#]De la cr[B]uz al mor[D#]ir, de mor[Bb]ir a la l[B]uz
+Dios, tu n[D]ombre exaltar[F#]é
+{end_of_chorus}
+
+
+{comment: Intro}
+Dios, tu nombre exaltaré
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{title: 8. Tu Eres Mi Dios}
+{key: E}
+
+
+{comment: INTRO: E - Esus4 - E}
+
+
+{comment: I y II}
+{start_of_verse}
+Señor tu graci[E]a, me da sol[B]az y tu pres[C#m]encia[A] me da la p[E]az.[Esus4]  [E]  
+[E]Señor tu gracia, me [B]da solaz y tu pre[C#m]sencia [A]me da la [E]paz.[Esus4]  [E]  
+Tu gran [B]fuerza me sostiene, es mi ref[C#m]ugio en la tor[A]menta
+por eso te al[E]abo, [B]tú eres mi [A]Dios.  [(Am7**)] 
+{end_of_verse}
+
+
+{comment: CORO I y II}
+{start_of_chorus}
+Rey de r[E]eyes, mi Señ[B]or, Padre et[C#m]erno, Dios de am[A]or
+yo te ex[E]alto y me entr[B]ego, Salvad[A]or
+Rey de rey[E]es, cread[B]or, no hay o[C#m]tro igual a [A]ti
+por eso te al[E]abo[B], tú eres mi Di[A]os.
+{end_of_chorus}
+
+
+
+
+
+
+
+
+{title: 9. Maranatha}
+{key: G}
+
+
+{comment: INTRO: C - (G/B - D) - Em - D/F# - C - G}
+
+
+{comment: I}
+{start_of_verse}
+[C]Tenemos un llamad[D - Em]o    y un mensa[D/F#]je a pr[G]edic[C]ar.    
+-Palabra poderos[D - Em]a, que vidas pu[D/F#]ede tr[G]ansform[C]ar.
+Es nuestro privile[D - Em]gio   servir cumpli[D/F#]endo l[G]a misión[C].
+Llevando espera[D - Em]nza a toda tr[D/F#]ibu y naci[A]ón,  [C] 
+A toda tribu y naci[A]ón.  [Dsus4 - D] 
+{end_of_verse}
+
+
+{comment: CORO I / II}
+{start_of_chorus}
+Maran[C]ata, m[D]ar[-]an[Em]ata, ya muy pr[C]onto Jes[Em]ús volver[Dsus4 - D]á.  
+[G/B]Maran[C]ata, m[D]ar[-]an[Em]ata, ya muy pr[C]onto Je[D]sús volverá.
+{end_of_chorus}
+
+
+{comment: INTRO II: C - (G/B - D) - Em - D/F# - C - G}
+
+
+{comment: II}
+{start_of_verse}
+[C]Temed a Dios y d[D]ad[-]le[Em]   la honra, [D/F#]gloria [G]y hon[C]or,
+-porque llegó la h[D]o[-]r[Em]a  de su [D/F#]juicio [G]de a[C]mor.
+Es nuestro privil[D]e[-]gi[Em]o,  a todo el m[D/F#]undo [G]anunci[C]ar
+el evangelio et[D]er[-]n[Em]o,  decir que [D/F#]Cristo volver[A]á, [C] 
+que muy pronto volver[A]á.  [Dsus4 - D]  
+{end_of_verse}
+
+
+{comment: INTRO III: C - (G/B - D) - Em - D/F# - C - G}
+
+
+{comment: III}
+{start_of_verse}
+[C]  Trabajando en [D]uni[Em]ón,
+anunc[D/F#]iando salvaci[G]ón.
+La aurora llegar[C]á
+y tu [D/G]luz alumbrar[C]á.
+Tu Palabra es [D]alim[Em]ento,
+de prom[D/F#]esa y cumplimi[G]ento.
+La aurora llegar[C]á
+y tu luz alumbrar[A]á,[C]  y tu luz alumbrar[A]á  [Dsus4 - D]       
+{end_of_verse}
+
+
+{comment: CORO III}
+{start_of_chorus}
+Maran[(C]ata, m[D]ar[-]ana[Em]ta,  ya muy pr[C]onto Jes[Em)]ús volver[Dsus4 - D]á.
+Marana[C]ta, mar[D]an[-]at[Em]a, (ya muy p[C]ronto Je[D]sús vol[(Em - D/F# - G - G/B)]verá) x2       
+ya muy pr[C]onto Jes[D]ús volverá.
+{end_of_chorus}
+
+
+{comment: INTRO IV: C - (G/B - D) - Em - D/F# - C - G}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{title: 10. Brilla Jesús}
+{key: G}
+
+
+{comment: INTRO: G - Dsus4 x4}
+
+
+{comment: I}
+{start_of_verse}
+Cr[G]isto, t[C]u gran [G]amor me insp[D]ira; Cr[G]isto, t[C]u gran [G]amor me an[D]ima;
+pu[C]es tu l[D]uz ilum[Bm]ina la osc[Em]uridad, t[C]u verd[D]ad me cond[Bm]uce a la l[Em]ibertad.
+Br[F]illa en m[D]í, br[F]illa en m[D]í.
+{end_of_verse}
+
+
+{comment: Coro I y II}
+{start_of_chorus}
+¡Brilla, [G]Jes[Bm]ús! D[Em]anos h[C]oy la luz que da tu [D]gloria,
+pu[G]es t[Bm]u cal[Em]or trae p[F]az y am[D]or.
+Ven c[G]om[Bm]o el Sol d[Em]e justicia [C]y miseric[D]ordia.
+¡Br[G]illa,[Bm] Jesús[Em]! Danos h[Am]oy t[D]u l[G]uz.
+{end_of_chorus}
+
+
+{comment: II}
+{start_of_verse}
+Cr[G]isto, v[C]engo a t[G]u pres[D]encia, [G]atra[C]ído por t[G]u pur[D]eza.
+[C]Exam[D]ina mi v[Bm]ida y pru[Em]ébame; l[C]impia t[D]oda mald[Bm]ad con tu s[Em]angre.
+Br[F]illa en m[D]í, br[F]illa en m[D]í.
+{end_of_verse}
+
+
+
+
+
+
+{title: 11. ¿Cómo puedo huir?}
+{key: D}
+
+
+{comment: INTRO: G - Bm x2}
+
+
+
+
+{comment: I}
+{start_of_verse}
+¿C[G]ómo puedo huir, Señor, de tus [A]ojos de am[Bm]or?
+C[G]on tu mano me hallarás no imp[A]orta dónde est[D]é
+[G]Tú conoces m[D]i vivir desde [A]antes de nac[Bm]er
+D[G]esde cuando n[D]ace el sol hasta [A]el anochec[D]er
+{end_of_verse}
+
+
+Precioso es tu gran amor
+
+
+{start_of_chorus}
+¡Exa[D]ltad[G]o, coron[D]ad[G]o! En tu n[D]ombr[G]e hay pod[A]er
+Eres d[Bm]ign[A]o de al[G]abanza y gl[D]oria
+Mi des[Em]eo es viv[A]ir por t[D]i
+{end_of_chorus}
+
+
+{comment: II}
+{start_of_verse}
+D[G]éjame beber, Señor, de tu fu[A]ente sin f[Bm]in
+P[G]ara que otros pu[D]edan ver tu pod[A]er actuando en [D]mí
+A la s[G]ombra de tus al[D]as yo encu[A]entro protecci[Bm]ón
+Cu[G]ando estoy perd[D]ido me ofrec[A]es direcci[D]ón
+Precios[D]o es tu gr[G]an am[A]or
+{end_of_verse}
+
+
+{start_of_chorus}
+¡Exa[D]ltad[G]o, coron[D]ad[G]o! En tu n[D]ombr[G]e hay pod[A]er
+Eres d[Bm]ign[A]o de al[G]abanza y gl[D]oria
+Mi de[Em]seo es viv[A]ir por ti[D]    [//B//]  
+{end_of_chorus}
+
+
+{comment: CORO UP}
+{start_of_chorus}
+¡Ex[E]altad[A]o, coron[E]ad[A]o! En tu n[E]ombr[A]e hay pod[B]er
+Eres [C#m]dign[B]o de alab[A]anza y gl[E]oria
+Mi d[F#m]eseo es viv[B]ir por [E]ti  [C#m]  
+Mi d[F#m]eseo es viv[B]ir por [E]ti
+{end_of_chorus}
+
+
+
+
+
+
+{title: 12. La única esperanza}
+{key: E}
+
+
+{comment: INTRO}
+
+
+{comment: I y II}
+{start_of_verse}
+Solo hay un Di[E]os, una verdad, una m[C#m7]isión. Hoy este mundo cl[A]ama por salvaci[E]ón 
+Hay un[E] amor que nos transforma hay [C#m7]un poder, que nos libera hay u[A9]na paz, 
+que el mundo n[E]o da
+{end_of_verse}
+
+
+{comment: Pre-coro}
+[A]  Somos la [E]luz que mostrar[B]á a Dios en esta generación
+[A]Somos la v[E]oz que anunciar[B]á 
+
+
+{start_of_chorus}
+A Jes[C#m]us la gr[A]an esper[E]anza[B] 
+El ca[C#m]mino y s[A]alvac[E]ión[B] 
+El am[C#m]or que c[A]ubre al m[E]un[B]do la vida y l[A]a verdad [(Pausa)]  
+La única esper[E]anz[A]a  [C#m]  [B]   
+{end_of_chorus}
+
+
+{comment: Interludio}
+[A]Si te am[E]amo[B]s en u[C#m7]nidad,[A] El mundo ent[E]ero te con[B]ocerá (2x)
+
+
+{comment: Coro Final}
+{start_of_chorus}
+A Jes[C#m]us la [A]gran es[E]per[B]anza 
+El cam[C#m]ino y s[A]alv[B]ación
+El [C#m]amor que c[B]ubre al m[F#]und[C#]o la vida y l[B]a verdad [(Pausa)]        
+La única esperanza[F#]  [B]      
+{end_of_chorus}
+
+
+
+
+
+
+
+
+{title: 13. Canto de alegría}
+{key: D}
+
+
+{comment: INTRO: D - G - A - G - D x2}
+
+
+{comment: I}
+{start_of_verse}
+C[D]anto de alegría porque t[G]engo amor
+v[A]ivo cada día por el s[G]alvad[D]or
+qui[D]ero a todo el mundo de él siempr[G]e hablar
+p[A]orque Cristo a todos nos pued[G]e salv[D]ar
+{end_of_verse}
+
+
+{start_of_chorus}
+Por eso c[D]anto, porque t[G]engo amor
+v[A]ivo por el s[G]alvad[D]or
+Qui[D]ero de él siempr[G]e hablar
+p[A]orque él nos quier[G]e salv[D]ar
+{end_of_chorus}
+
+
+{comment: II}
+{start_of_verse}
+[D]En todas las pruebas Él me s[G]ostendrá
+n[A]o me desampara, no me d[G]ejar[D]á
+[D]Él te necesita para tr[G]abajar
+v[A]amos adelante, vamos [G]a triu[D]nfar
+{end_of_verse}
+{title: 14. La alegría}
+{key: E}
+
+
+{comment: INTRO: E - E7 - A - A7 - E - B - E Esus4 E}
+
+
+
+
+{comment: I}
+{start_of_verse}
+[E]La alegría está en el corazón
+De aqu[A]el que conoce a Jes[E]ús, 
+[E]La verdadera paz está en aquel
+que [F#]ya conoce a Jes[B]ús [A] 
+{end_of_verse}
+
+
+{comment: II}
+{start_of_verse}
+[E]El sentimiento m[E7]ás precioso
+que vi[A]ene de nuestro Señ[Am7]or
+Es el am[E]or de aqu[B]el
+Que ya conoce a Jes[E]ús[Asus2].     [E]    
+{end_of_verse}
+
+
+{comment: III}
+{start_of_verse}
+Alel[E]uya, Alel[A]uy[E]a [B]   
+Al[B]e[-]l[E]uya, Alel[F#]uy[B]a [A]   
+{end_of_verse}
+
+
+{comment: IV}
+{start_of_verse}
+[E]El sentimiento m[E7]ás precioso
+que vi[A]ene de nuestro Señ[Am7]or 
+Es el am[E]or de aqu[B]el
+Que ya conoce a Jes[E]ús[Asus2].     [E] 
+{end_of_verse}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{title: 15. Por tu gracia y amor}
+{key: G}
+
+
+{comment: INTRO: G - D - Em - Am x2}
+
+
+{comment: I}
+{start_of_verse}
+[G]Vengo a [D]ti, Jes[Em]ús, quiero ren[Bm]ovar mi [Em]ser, con el gran am[C]or que encontr[D]é en [Em]ti
+[G]Yo sé que to[D]do el [Em]mal, manchas que en [Bm]mí est[Em]án
+Se terminar[C]án[D] por tu gracia y [C]amo[G]r
+{end_of_verse}
+
+
+{start_of_chorus}
+[C]Ven, Je[D]sús, llévame en tus [C]braz[G]os, [C]quiero es[D]tar siemp[G]re junto [G]a [Am]ti [G]  [G7]   
+Y as[C]í vo[D]lar tan alto como un [C]ave[G], pues qui[D/F# - Em]ero recibir tu Espí[D/F#]ritu en [C]mí
+Por tu [D]gracia y am[C]or  [G]  
+{end_of_chorus}
+
+
+{comment: II}
+{start_of_verse}
+[G]Con mis [D]ojos [Em]hoy, quiero contem[Bm]plar tu [Em]faz, conocer tu am[G]or y crec[D]er en t[Em]i     
+[G]Renueva [D]mi pen[Em]sar, enséñame de [Bm]tu gran ver[Em]dad
+Cada día [C]más[D] por tu gracia y a[C]mor   [G] 
+{end_of_verse}
+
+
+{start_of_chorus}
+[C]Ven, Je[D]sús, llévame en tus [C]bra[G]zos, [C]quiero es[D]tar siempre junto [G]a [Am]ti [G]  [G7]    
+Y as[C]í vol[D]ar tan alto como un [C]ave[G], pues qu[D/F# - Em]iero recibir tu Espí[D/F#]ritu en [C]mí
+Por tu [D]gracia y am[C]or [G]   x2
+{end_of_chorus}
+
+
+{comment: Final}
+Pues [G - D/F# - Em]quiero recibir tu Es[D/F#  -]píritu en [C]mí
+Por tu [D]gracia y a[C]mor  [G]   x2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{title: 16. Quiero cantar una linda canción}
+{key: C}
+
+
+{comment: INTRO: C - Am - Dm - G x2}
+
+
+
+
+{comment: I}
+{start_of_verse}
+[C]Quiero cantar una [Am]linda canción de un [Dm]hombre que me transfor[G]mó
+[C]Quiero cantar una [Am]linda canción de aqu[Dm]el que mi vida cambi[G]ó
+{end_of_verse}
+
+
+{start_of_chorus}
+Es mi am[C]igo Jes[Am]ús, es mi am[F]igo Jes[G]ús
+Él es Di[C]os, él r[Am]ey, es am[F]or y ver[G]dad
+Solo en [C]él encon[Am]tré esa [F]paz que bus[G]qué
+Solo en [C]Él encon[Am]tré la fel[F]ic[G]id[C]ad
+{end_of_chorus}
+
+
+{comment: II}
+{start_of_verse}
+Un[C]idos cantemos y gl[Am]oria entonemos al [Dm]maravilloso Je[G]sús
+Un[C]idos cantemos y gl[Am]oria entonemos a qui[Dm]en por nosotros muri[G]ó
+Religi[C]ones habr[Am]án, pero [F]no salvar[G]án, solo el [C]Hijo de Di[Am]os puede [F]dar salvaci[G]ón
+Solo en [C]él encontr[Am]é esa [F]paz que busqu[G]é
+Solo en [C]Él encontr[Am]é la fel[F]ic[G]id[C]ad
+{end_of_verse}
+
+
+
+
+
+
+{title: 17. No es común}
+{key: G}
+
+
+{comment: INTRO: G - C   G Em - D# D}
+
+
+
+
+{comment: I}
+{start_of_verse}
+Dios un d[C]ía me llamó p[D]ara hablar de s[G]alvación
+Ir al m[C]undo a anunci[D]ar que volver[G]á
+Puedo v[Em]er que no es co[Am]mún la ra[D]zón de esta [G]fe
+¿Cómo pu[A]ede alguien [A7]hoy aún ser fi[D]el?
+Muchos b[C]uscan el din[D]ero o el éxito[G] alcanzar
+Contra l[C]a corriente el[D]ijo yo and[G]ar
+Mostra[Em]ré de quién yo s[Am]oy, de el que un [D]día me sal[G]vó
+Decid[A]í seguir a Cr[A7]isto sin tem[D]or
+{end_of_verse}
+
+
+{comment: CORO I / II}
+{start_of_chorus}
+Si vi[G]vir con mi Jesús no [Bm7]es común, yo no qui[Dm7]ero ser común hasta[C] el final[D]  
+Yo no p[G]uedo resistirme [Am]a su amo[B]r que me a[Em]braza con la fuerza [A]del perd[D]ón 
+Si escuc[G]har su dulce voz no[Bm7] es común, yo no [Dm7]soy común y es mi d[C]ecisión[D]  
+Hoy entr[G]ego por completo el c[D]orazó[E]n
+En cada s[Am]ituación pon tu am[C]or que no es com[Cm]ún en mí[G]  
+{end_of_chorus}
+
+
+{comment: PUENTE: G - D# D}
+
+
+{comment: II}
+{start_of_verse}
+Por la [C]fe que tú me das [D]verdadero qui[G]ero ser
+Y así que [C]otros pu[D]edan verte en [G]mí
+Yo me r[Em]indo a tu po[Am]der, ven y [D]úsame otra [G]vez
+Donde [A]tú me envíes si[A7]empre yo ir[D]é
+{end_of_verse}
+
+
+{comment: PUENTE MOD.: D#}
+
+
+{comment: CORO III}
+{start_of_chorus}
+Si escuch[G#]ar su dulce voz no [Cm7]es común, yo no [D#m7]soy común y es mi [C#]decisión[D#] 
+Hoy entr[G#]ego por completo el c[D#]orazón [F] 
+En cada s[A#m]ituación pon tu am[C#]or que no es com[C#m]ún en [G#]mí
+{end_of_chorus}
+
+
+ 
+
+
+
+
+{title: 18. Tu palabra (2018)}
+{key: Bb}
+
+
+{comment: INTRO: Gm Bb Eb7 F x2}
+
+
+
+
+{comment: I}
+{start_of_verse}
+Quiero o[Gm]ír tu volunt[Bb]ad, tu Pal[Eb]abra y tu [F]voz.
+Quiero and[Gm]ar en tus cam[Bb]inos y tu ver[Eb]dad será mi [F]luz.
+{end_of_verse}
+
+
+{comment: II}
+{start_of_verse}
+Lo decid[Gm]í, quiero viv[Bb]ir. Seguir tus p[Eb]asos, mi Se[F]ñor.
+No más pec[Gm]ar, ya no ca[Bb]er. Aprender m[Eb]ás de tu a[F]mor.
+{end_of_verse}
+
+
+{start_of_chorus}
+Sólo tu Pal[Cm]abra me dará la [Bb]vida, es mi alim[Bb]ento y mi [F]pan.
+Letras muy preci[Cm]osas, gracia revel[Bb]ada, mi esper[Bb]anza y salvaci[F]ón.
+{end_of_chorus}
+
+
+{comment: INTERLUDIO: Gm Bb Eb7 F}
+
+
+
+
+{comment: III}
+{start_of_verse}
+Lo dec[Gm]idí, quiero viv[Bb]ir. Seguir tus p[Eb]asos, mi Se[F]ñor.
+No más pec[Gm]ar, ya no ca[Bb]er. Aprender m[Eb]ás de tu am[F]or.
+{end_of_verse}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{title: 19. Buscas}
+{key: C}
+
+
+{comment: INTRO: C G Am F, C G Am F}
+
+
+
+
+{comment: I}
+{start_of_verse}
+[C]Busc[G]as, c[Am]orazones qu[F]e no teman [C]ir [G]al campo de ba[Am]talla[F] 
+[C]Busc[G]as, v[Am]idas dedic[F]adas a serv[C]ir, que [G]amen tu pa[Am]labr[F]a 
+B[G]uscas luces [Am]en la oscuri[F]dad, [G]que no tengan mi[Am]edo de brill[G]ar 
+{end_of_verse}
+
+
+{comment: CORO I, II, III}
+{start_of_chorus}
+Porque la mi[C]es [G]en verdad es [Am]mucha, [F]y no tengo ex[C]cusas, [G]para decir [Am]no
+Si [F]me llamaste a s[C]er, [G]ese que tú [Am]buscas, [F]que no tiene [C]dudas [G]de la decisi[Am]ón
+De [F]entregar de nu[Dm]evo el coraz[G]ón a tu misi[C]ón.
+{end_of_chorus}
+
+
+{comment: II}
+{start_of_verse}
+[C]Busc[G]as, a[Am] los que se entr[F]egan de verd[C]ad, y [G]no a los me[Am]jores[F] 
+[C]Busc[G]as, a[Am] los que comp[F]arten sin dud[C]ar, tus gr[G]andes bendici[Am]ones[F] 
+[G]Buscas luces [Am]en la oscurid[F]ad, [G]que no tienen mi[Am]edo de brill[G]ar 
+{end_of_verse}
+
+
+
+
+
+
+
+
+{title: 20. En mi caminar}
+{key: Eb}
+
+
+{comment: INTRO: Ab, Cm, Eb, Bb}
+
+
+{comment: I}
+{start_of_verse}
+[Ab]Todos mis tesoros pueden d[Cm]esaparecer, [Ab]lo que amo hoy tal vez mañ[Eb]ana ya no es[Bb]té,
+[Ab]Pero a mi lado siempre [Cm]alguien estará, mi [Fm]vida cambiará mis planes guia[Bb]rá.
+{end_of_verse}
+
+
+{comment: II}
+{start_of_verse}
+[Ab]Cada día vuelvo a desper[Cm]tar por su poder, [Ab]y su voz me llama cuando v[Eb]e que caer[Bb]é 
+[Ab]Encomiendo a Cristo mi ca[Cm]mino porque se.... Que [Fm]si confío en él, [Bb]él hará
+{end_of_verse}
+
+
+{start_of_chorus}
+[Eb]Mi señor siempre estás tan [Bb]cerca de mi coraz[Cm]ón.... Tu amor jam[Ab]ás me abandonará
+[Eb]Que tu luz me mantenga si[Bb]empre lejos del [Cm]dolor   [Ab]   
+[Ab (Intro)]En mi caminar
+{end_of_chorus}
+
+
+{comment: III}
+{start_of_verse}
+[Ab]Porque mis errores en el [Cm]mar se olvidarán, [Ab]y como la nieve tu pur[Eb]eza me dar[Bb]ás
+[Ab]Con cada segundo de mi [Cm]vida que se va, entr[Fm]ego todo a ti y si[Bb]ento paz
+{end_of_verse}
+
+
+{comment: Final: Ab, Cm, Eb, Bb x2 Ab}
+
+
+
+
+
+
+
+
+{title: 21. Victoria en Cristo}
+{key: E}
+
+
+{comment: INTRO: B - B - A - B}
+
+
+{comment: I}
+{start_of_verse}
+[E]Oí la bella historia que Jes[A]ús dejó su [E]gloria
+Y en el G[C#m]ólgota [E]así murió por [F#]muchos como [B]yo  [A]  
+O[E]í de sus gem[E7]idos, de su [A]sangre que me [E]salva
+Y al f[C#m]in, contrito m[E]e incliné, vict[A]oria [B]encon[E]tré
+{end_of_verse}
+
+
+{comment: CORO I / II}
+{start_of_chorus}
+Vic[E]toria en [E7]Cristo, et[A]erna Vic[E]toria
+Me [C#m]busca, me s[E]alva, pues [F#]en la cruz muri[B]ó  [A]   
+Qué p[E]az y alegr[E7]ía, naci[A]ó un nuevo [E]día
+Vic[C#m]toria Jes[G#m]ús me dio, su [F#m]sangre [A]derra[E]mó
+{end_of_chorus}
+
+
+{comment: II}
+{start_of_verse}
+O[E]í también que cura a aque[A]l que le pro[E]cura
+Que [C#m]al mudo dio un[E]a canción y al c[F#]iego su visi[B]ón  [A]  
+Al r[E]ey clamé: “Ma[E7]estro, ven, rest[A]aura hoy mi [E]vida”
+Y pr[C#m]onto Cristo me[E] atendió, vict[A]oria [B]él me di[E]o
+{end_of_verse}
+
+
+{comment: PUENTE: B - B - C#m / B / A - C}
+
+
+{comment: III}
+{start_of_verse}
+O[F]í que aquella gloria llegar[Bb]á tras la vic[F]toria
+A los [Dm]redimidos [F]por Jesús en [G]fulgurante [C]luz  [Bb]  
+de [F]ángeles can[F7]tando y mi [Bb]casa espe[F]rando
+Ser[Dm]á glorioso all[F]í llegar y as[Bb]í po[C]der can[F]tar
+{end_of_verse}
+
+
+{comment: CORO III}
+{start_of_chorus}
+Vic[F]toria en [F7]Cristo, et[Bb]erna Vic[F]toria
+Me [Dm]busca, me [F]salva, pues [G]en la cruz muri[C]ó   [Bb]  
+Qué p[F]az y alegr[F7]ía, naci[Bb]ó un nuevo d[F]ía
+Vic[Dm]toria Jes[Am]ús me dio, su [Gm]sangre [Bb]derra[F]mó
+{end_of_chorus}
+
+
+
+
+{title: 22. Dame la mano}
+{key: C}
+
+
+{comment: INTRO: C x4}
+
+
+{comment: I}
+{start_of_verse}
+No me imp[C]orta de dónde tú vengas
+Si detrás del calvario tú est[G]ás
+Si tu c[C]orazón [C7]es como el m[F]ío   [Fm]    
+Dame la m[C]ano y mi herm[G]ano ser[C]ás [Csus4]      [C]    
+{end_of_verse}
+
+
+{start_of_chorus}
+Dame la [C]mano, querido hermano,
+Dame la m[F]ano y mi herm[G]ano ser[C]ás
+Dame la m[C]ano, querido hermano,
+Dame la m[F]ano y mi her[G]mano ser[C]ás.
+{end_of_chorus}
+
+
+{comment: II}
+{start_of_verse}
+Hay un [C]texto que sale en la Biblia
+Que se encuentra en primera de Ju[G]an
+Todo aqu[C]el que no [C7]ame a su her[F]mano[Fm]: ¡mentir[C]oso! Llam[G]ado ser[C]á
+{end_of_verse}

@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChordPro Studio — Generador & Exportador</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Fraunces:ital,wght@0,300;0,600;0,700;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f4f1ec;
+            --surface: #ffffff;
+            --surface-2: #faf8f5;
+            --header-bg: #1a1814;
+            --primary: #c84b2f;
+            --primary-light: rgba(200,75,47,0.07);
+            --primary-hover: #a83825;
+            --ink: #1a1814;
+            --ink-soft: #5a5650;
+            --ink-muted: #9a958f;
+            --border: #e0dbd4;
+            --border-strong: #c8c3bc;
+            --chord-color: #c84b2f;
+            --chord-bg: #fdeee9;
+            --success: #2a7a4b;
+            --tag-color: #2563eb;
+            --shadow-sm: 0 1px 3px rgba(26,24,20,0.08);
+            --shadow-md: 0 4px 12px rgba(26,24,20,0.1);
+            --shadow-lg: 0 8px 24px rgba(26,24,20,0.12);
+            --radius: 10px;
+            --radius-sm: 6px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg); color: var(--ink);
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+
+        /* ══ HEADER ══ */
+        .app-header {
+            background: var(--header-bg); color: #f4f1ec;
+            padding: 0 32px; display: flex; align-items: center;
+            justify-content: space-between; height: 64px;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+        }
+        .header-brand { display: flex; align-items: center; gap: 14px; }
+        .header-icon {
+            width: 36px; height: 36px; background: var(--primary);
+            border-radius: 8px; display: flex; align-items: center;
+            justify-content: center; font-size: 18px; flex-shrink: 0;
+        }
+        .header-title {
+            font-family: 'Fraunces', serif; font-size: 20px;
+            font-weight: 600; letter-spacing: -0.3px; color: #f4f1ec;
+        }
+        .header-title span { color: var(--primary); }
+        .version-badge {
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+            color: rgba(244,241,236,0.7); font-family: 'DM Mono', monospace;
+            font-size: 11px; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px;
+        }
+        .step-indicator { display: flex; align-items: center; }
+        .step-label { font-size: 12px; color: rgba(244,241,236,0.4); margin-right: 8px; }
+        .step-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s; margin-left: 6px;
+        }
+        .step-dot.active { background: var(--primary); border-color: var(--primary); box-shadow: 0 0 0 3px rgba(200,75,47,0.3); }
+        .step-dot.done { background: var(--success); border-color: var(--success); }
+
+        /* ══ MAIN ══ */
+        .app-main { flex: 1; max-width: 1060px; width: 100%; margin: 0 auto; padding: 32px 24px; }
+
+        /* ══ PANELS ══ */
+        .panel {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 28px; margin-bottom: 20px;
+            box-shadow: var(--shadow-sm); animation: panelIn 0.35s ease forwards;
+        }
+        @keyframes panelIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .panel-header {
+            display: flex; align-items: center; gap: 12px;
+            margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+        }
+        .panel-number {
+            width: 28px; height: 28px; background: var(--primary); color: white;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0;
+        }
+        .panel-title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 600; color: var(--ink); }
+        .panel-desc { font-size: 13px; color: var(--ink-muted); margin-left: auto; }
+
+        /* ══ TOOLBAR ══ */
+        .toolbar-section { margin-bottom: 16px; }
+        .toolbar-label {
+            font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+            font-weight: 600; color: var(--ink-muted); margin-bottom: 8px; display: block;
+        }
+        .toolbar { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; }
+
+        /* ══ INLINE META INPUT ══ */
+        .meta-input-row {
+            display: flex; align-items: center; gap: 6px;
+            background: #fff; border: 1px solid var(--primary);
+            border-radius: var(--radius-sm); padding: 3px 3px 3px 10px;
+            box-shadow: 0 0 0 3px rgba(200,75,47,0.1);
+            animation: inputSlide 0.18s ease;
+            min-width: 220px; max-width: 340px; width: 100%;
+        }
+        @keyframes inputSlide {
+            from { opacity: 0; transform: scaleY(0.8); transform-origin: top; }
+            to { opacity: 1; transform: scaleY(1); }
+        }
+        .meta-input-label {
+            font-size: 11px; font-weight: 600; color: var(--ink-muted);
+            white-space: nowrap; text-transform: uppercase; letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+        .meta-input-field {
+            border: none; outline: none; font-family: 'DM Mono', monospace;
+            font-size: 13px; color: var(--ink); background: transparent;
+            flex: 1; min-width: 80px; padding: 4px 0;
+        }
+        .btn-confirm {
+            background: var(--primary); color: white; border: none;
+            border-radius: 5px; width: 30px; height: 30px; display: flex;
+            align-items: center; justify-content: center; cursor: pointer;
+            font-size: 15px; flex-shrink: 0; transition: background 0.15s;
+        }
+        .btn-confirm:hover { background: var(--primary-hover); }
+        .btn-cancel-meta {
+            background: transparent; color: var(--ink-muted); border: none;
+            width: 26px; height: 26px; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; font-size: 18px;
+            border-radius: 4px; transition: background 0.15s; flex-shrink: 0;
+        }
+        .btn-cancel-meta:hover { background: var(--bg); color: var(--ink); }
+
+        /* ══ BUTTONS ══ */
+        .btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 14px; border: none; border-radius: var(--radius-sm);
+            font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+            cursor: pointer; transition: all 0.18s; white-space: nowrap;
+        }
+        .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .btn:active { transform: translateY(0); }
+        .btn-secondary { background: var(--surface-2); color: var(--ink); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: var(--bg); border-color: var(--border-strong); }
+        .btn-tag { background: #eff6ff; color: var(--tag-color); border: 1px solid #bfdbfe; font-family: 'DM Mono', monospace; font-size: 12px; }
+        .btn-tag:hover { background: #dbeafe; }
+        .btn-success { background: var(--success); color: white; font-weight: 600; }
+        .btn-success:hover { background: #225e3c; }
+        .btn-dark { background: var(--ink); color: var(--bg); }
+        .btn-dark:hover { background: #2a2620; }
+        .btn-full { width: 100%; justify-content: center; padding: 12px 20px; font-size: 14px; border-radius: var(--radius); margin-top: 16px; }
+
+        /* ══ TEXTAREA ══ */
+        .lyrics-textarea {
+            width: 100%; height: 220px; font-family: 'DM Mono', monospace;
+            font-size: 14px; line-height: 1.7; padding: 16px;
+            border: 1px solid var(--border); border-radius: var(--radius);
+            background: var(--surface-2); color: var(--ink); resize: vertical;
+            transition: border-color 0.2s, box-shadow 0.2s; margin-top: 16px;
+        }
+        .lyrics-textarea:focus {
+            outline: none; border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(200,75,47,0.1); background: white;
+        }
+
+        /* ══ INTERACTIVE EDITOR ══ */
+        #interactiveEditor {
+            background: var(--surface-2); padding: 28px 28px 18px;
+            border: 1px solid var(--border); border-radius: var(--radius);
+            overflow-x: auto; min-height: 120px;
+        }
+        .editor-info-bar {
+            background: #fffbf0; border: 1px solid #fde68a; border-radius: var(--radius-sm);
+            padding: 10px 14px; font-size: 12px; color: #92400e;
+            margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+        }
+        .editor-line { white-space: nowrap; margin-bottom: 22px; display: flex; align-items: flex-end; }
+        .editor-tag {
+            display: block; white-space: nowrap; margin-bottom: 12px;
+            padding: 5px 12px; background: #eff6ff;
+            border-left: 3px solid var(--tag-color);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-family: 'DM Mono', monospace; font-size: 13px;
+            font-weight: 500; color: var(--tag-color);
+        }
+
+        /* Carácter */
+        .char-container {
+            display: inline-flex; flex-direction: column; align-items: center;
+            vertical-align: bottom; position: relative; cursor: pointer;
+            border-radius: 3px; transition: background 0.12s;
+        }
+        .char-container:hover { background: #fff0eb; }
+        .char-container.drag-over {
+            background: #ffd9cc; outline: 2px dashed var(--primary);
+            outline-offset: -1px; border-radius: 3px;
+        }
+
+        /* ACORDE — FIX: clase .has-chord en lugar de :not(:empty) */
+        .chord-display {
+            min-height: 22px; min-width: 10px; color: var(--chord-color);
+            font-weight: 700; font-family: 'DM Mono', monospace; font-size: 14px;
+            outline: none; text-align: center; line-height: 22px; border-radius: 4px;
+            transition: background 0.12s, box-shadow 0.12s; padding: 0 1px; cursor: text;
+            /* Sin background por defecto */
+        }
+        .chord-display:focus {
+            background: #fef9c3 !important;
+            min-width: 34px; box-shadow: 0 0 0 2px #fbbf24;
+        }
+        /* Clase aplicada vía JS solo cuando tiene texto real */
+        .chord-display.has-chord {
+            background: var(--chord-bg); padding: 1px 4px; cursor: grab;
+        }
+        .chord-display.has-chord:active { cursor: grabbing; }
+        .chord-display.dragging { opacity: 0.35; }
+
+        /* Animación de aterrizaje del acorde arrastrado */
+        @keyframes landPulse {
+            0%   { background: rgba(200,75,47,0.35); }
+            100% { background: transparent; }
+        }
+        .char-container.drag-landed {
+            animation: landPulse 0.4s ease forwards;
+        }
+
+        .lyric-char {
+            font-family: 'DM Mono', monospace; font-size: 18px; min-width: 10.8px;
+            line-height: 1; white-space: pre; color: var(--ink);
+            padding: 1px 0; transition: color 0.12s;
+        }
+        .char-container:hover .lyric-char { color: var(--primary); }
+
+        /* ══ OUTPUT ══ */
+        #outputChordPro {
+            width: 100%; height: 280px; font-family: 'DM Mono', monospace;
+            font-size: 13px; line-height: 1.7; padding: 18px;
+            background: #1a1814; color: #e8e0d5; border: none;
+            border-radius: var(--radius); resize: vertical;
+        }
+
+        /* ══ EXPORT CARDS ══ */
+        .export-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 16px; }
+        .export-card {
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+            padding: 16px 12px; border: 1px solid var(--border); border-radius: var(--radius);
+            background: var(--surface-2); cursor: pointer; transition: all 0.18s;
+            font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: var(--ink);
+        }
+        .export-card:hover { border-color: var(--primary); background: var(--primary-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .export-card .icon { font-size: 22px; }
+        .export-card .label { font-size: 12px; font-weight: 600; }
+        .export-card .sub { font-size: 10px; color: var(--ink-muted); }
+
+        /* ══ FOOTER ══ */
+        .app-footer {
+            background: var(--header-bg); color: rgba(244,241,236,0.5);
+            padding: 20px 32px; font-size: 12px;
+            display: flex; align-items: center; justify-content: center;
+            gap: 8px; flex-wrap: wrap;
+        }
+        .footer-heart { color: var(--primary); font-size: 14px; }
+        .instagram-link {
+            display: inline-flex; align-items: center; gap: 6px; color: #f4f1ec;
+            text-decoration: none; font-weight: 600; font-size: 13px;
+            padding: 4px 10px; border-radius: 20px;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.2s;
+        }
+        .instagram-link:hover {
+            background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+            border-color: transparent; transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* ══ PRINT ══ */
+        @media print {
+            .app-header, .app-main, .app-footer, .no-print { display: none !important; }
+            #previewPrint { display: block !important; }
+            @page { margin: 2cm 2.5cm; }
+            body { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        #previewPrint { display: none; }
+
+        /* ══ TOAST ══ */
+        .toast {
+            position: fixed; bottom: 24px; right: 24px; background: var(--ink); color: white;
+            padding: 12px 18px; border-radius: var(--radius); font-size: 13px; font-weight: 500;
+            box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 8px;
+            transform: translateY(80px); opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+            z-index: 9999; pointer-events: none;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.success { background: var(--success); }
+        .toast.error { background: var(--primary); }
+
+        .divider { height: 1px; background: var(--border); margin: 20px 0; }
+        .help-text { font-size: 12px; color: var(--ink-muted); margin-top: 8px; display: flex; align-items: flex-start; gap: 6px; }
+
+        /* ══ CHORD PALETTE ══ */
+        .palette-bar {
+            display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+            background: var(--surface-2); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 8px 12px; margin-bottom: 12px;
+        }
+        .palette-label {
+            font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+            font-weight: 700; color: var(--ink-muted); flex-shrink: 0; margin-right: 2px;
+        }
+        .palette-chip {
+            display: inline-flex; align-items: center; gap: 4px;
+            background: var(--chord-bg); color: var(--chord-color);
+            border: 1px solid rgba(200,75,47,0.25); border-radius: 5px;
+            font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 700;
+            padding: 3px 10px; cursor: pointer; transition: all 0.15s; white-space: nowrap;
+            user-select: none;
+        }
+        .palette-chip:hover { background: var(--chord-color); color: white; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+        .palette-chip .chip-key {
+            font-size: 9px; font-weight: 400; opacity: 0.7;
+            font-family: 'DM Sans', sans-serif; margin-left: 2px;
+        }
+        .palette-chip-empty {
+            display: inline-flex; align-items: center;
+            background: transparent; color: var(--ink-muted);
+            border: 1px dashed var(--border-strong); border-radius: 5px;
+            font-size: 11px; padding: 3px 10px; cursor: pointer;
+            transition: all 0.15s; white-space: nowrap;
+        }
+        .palette-chip-empty:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* Popover flotante de paleta al enfocar acorde */
+        .chord-palette-popup {
+            position: fixed; z-index: 500;
+            background: white; border: 1px solid var(--border);
+            border-radius: var(--radius); box-shadow: var(--shadow-lg);
+            padding: 8px; display: flex; flex-wrap: wrap; gap: 5px;
+            max-width: 260px; animation: popupIn 0.15s ease;
+            pointer-events: all;
+        }
+        @keyframes popupIn {
+            from { opacity: 0; transform: translateY(4px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .palette-popup-chip {
+            display: inline-flex; flex-direction: column; align-items: center;
+            background: var(--chord-bg); color: var(--chord-color);
+            border: 1px solid rgba(200,75,47,0.2); border-radius: 6px;
+            font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 700;
+            padding: 5px 10px; cursor: pointer; transition: all 0.12s;
+            min-width: 44px; text-align: center;
+        }
+        .palette-popup-chip:hover { background: var(--chord-color); color: white; }
+        .palette-popup-chip .ppc-key {
+            font-size: 9px; font-weight: 400; opacity: 0.6;
+            font-family: 'DM Sans', sans-serif; margin-top: 1px;
+        }
+        .palette-popup-chip.ppc-custom { opacity: 0.55; font-style: italic; }
+
+        /* Modal de configuración de paleta */
+        .palette-modal-overlay {
+            position: fixed; inset: 0; background: rgba(26,24,20,0.5);
+            z-index: 1000; display: flex; align-items: center; justify-content: center;
+            animation: fadeIn 0.2s ease;
+        }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        .palette-modal {
+            background: white; border-radius: 14px; padding: 28px;
+            width: 480px; max-width: 95vw; max-height: 90vh; overflow-y: auto;
+            box-shadow: var(--shadow-lg); animation: slideUp 0.2s ease;
+        }
+        @keyframes slideUp {
+            from { opacity:0; transform: translateY(20px); }
+            to   { opacity:1; transform: translateY(0); }
+        }
+        .palette-modal h3 { font-family: 'Fraunces', serif; font-size: 18px; margin-bottom: 6px; }
+        .palette-modal p  { font-size: 13px; color: var(--ink-muted); margin-bottom: 20px; }
+        .palette-slot {
+            display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+        }
+        .palette-slot-key {
+            font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 700;
+            color: white; background: var(--ink-soft);
+            padding: 3px 7px; border-radius: 4px; flex-shrink: 0; min-width: 46px;
+            text-align: center;
+        }
+        .palette-slot-input {
+            flex: 1; font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 700;
+            color: var(--chord-color); padding: 7px 12px;
+            border: 1px solid var(--border); border-radius: var(--radius-sm);
+            background: var(--surface-2); outline: none; transition: border-color 0.2s;
+        }
+        .palette-slot-input:focus { border-color: var(--primary); background: white; }
+        .palette-slot-input::placeholder { color: var(--ink-muted); font-weight: 400; font-style: italic; }
+        .key-suggestion-row {
+            margin: 14px 0 8px; display: flex; flex-wrap: wrap; gap: 5px;
+            padding: 10px; background: var(--surface-2); border-radius: var(--radius-sm);
+        }
+        .key-suggestion-row p { font-size: 11px; color: var(--ink-muted); margin: 0 0 8px; width: 100%; }
+        .key-sug-chip {
+            font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 700;
+            color: var(--chord-color); background: var(--chord-bg);
+            border: 1px solid rgba(200,75,47,0.2); border-radius: 4px;
+            padding: 3px 8px; cursor: pointer; transition: all 0.12s;
+        }
+        .key-sug-chip:hover { background: var(--chord-color); color: white; }
+
+        /* ══ CHORDPRO DETECT BANNER ══ */
+        .detect-banner {
+            display: flex; align-items: center; gap: 10px;
+            background: #f0fdf4; border: 1px solid #86efac;
+            border-radius: var(--radius-sm); padding: 10px 14px;
+            margin-top: 10px; font-size: 12px; color: #166534;
+            animation: inputSlide 0.2s ease;
+        }
+        .detect-banner strong { font-weight: 600; }
+        .detect-banner .detect-badge {
+            background: var(--success); color: white;
+            font-size: 10px; font-weight: 700; padding: 2px 8px;
+            border-radius: 20px; letter-spacing: 0.5px; white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header no-print">
+    <div class="header-brand">
+        <div class="header-icon">♩</div>
+        <div class="header-title">ChordPro <span>Studio</span></div>
+        <div class="version-badge">v5.9.2</div>
+    </div>
+    <div class="step-indicator">
+        <span class="step-label">Paso</span>
+        <div class="step-dot active" id="dot1"></div>
+        <div class="step-dot" id="dot2"></div>
+        <div class="step-dot" id="dot3"></div>
+    </div>
+</header>
+
+<!-- MAIN -->
+<main class="app-main no-print">
+
+    <!-- PANEL 1: Estructura -->
+    <div class="panel" id="panel1">
+        <div class="panel-header">
+            <div class="panel-number">1</div>
+            <div class="panel-title">Estructura de la canción</div>
+            <div class="panel-desc">Metadatos y letra</div>
+        </div>
+
+        <!-- Metadatos con input inline -->
+        <div class="toolbar-section">
+            <span class="toolbar-label">📋 Metadatos</span>
+            <div class="toolbar" id="metaToolbar">
+                <button class="btn btn-secondary" id="btnTitle"  onclick="activateMetaInput('title',  'Título',     '🎵', this)">🎵 Título</button>
+                <button class="btn btn-secondary" id="btnArtist" onclick="activateMetaInput('artist', 'Artista',    '🎤', this)">🎤 Artista</button>
+                <button class="btn btn-secondary" id="btnKey"    onclick="activateMetaInput('key',    'Tonalidad',  '🎼', this)">🎼 Tonalidad</button>
+                <button class="btn btn-secondary" id="btnTempo"  onclick="activateMetaInput('tempo',  'Tempo (BPM)','⏱', this)">⏱ Tempo</button>
+            </div>
+            <div id="metaInputArea" style="margin-top: 10px;"></div>
+        </div>
+
+        <!-- Secciones -->
+        <div class="toolbar-section">
+            <span class="toolbar-label">📐 Secciones</span>
+            <div class="toolbar">
+                <button class="btn btn-tag" onclick="insertSectionTag('{sov}')">▶ Inicio Estrofa</button>
+                <button class="btn btn-tag" onclick="insertSectionTag('{eov}')">◼ Fin Estrofa</button>
+                <button class="btn btn-tag" onclick="insertSectionTag('{soc}')">▶ Inicio Coro</button>
+                <button class="btn btn-tag" onclick="insertSectionTag('{eoc}')">◼ Fin Coro</button>
+                <button class="btn btn-tag" onclick="insertSectionTag('{sob}')">▶ Inicio Puente</button>
+                <button class="btn btn-tag" onclick="insertSectionTag('{eob}')">◼ Fin Puente</button>
+                <button class="btn btn-secondary" onclick="insertCommentTag()">💬 Comentario</button>
+            </div>
+        </div>
+
+        <textarea class="lyrics-textarea" id="rawLyrics"
+            oninput="detectChordPro()" onpaste="setTimeout(detectChordPro,0)"
+            placeholder="Pega aquí la letra de la canción...&#10;&#10;• Usa los botones de arriba para agregar título, artista y tonalidad.&#10;• Luego estructura con los bloques de sección.&#10;• Si pegas un archivo ChordPro completo (con acordes entre []), se detectará y cargará automáticamente."></textarea>
+        <div id="detectBanner"></div>
+
+        <div class="help-text">
+            <span>💡</span>
+            <span>Los botones de sección insertan la etiqueta en la posición del cursor · Pega un ChordPro existente para editarlo directamente.</span>
+        </div>
+
+        <button class="btn btn-success btn-full" id="btnBuildEditor" onclick="buildEditor()">
+            Continuar → Colocar Acordes
+        </button>
+    </div>
+
+    <!-- PANEL 2: Editor -->
+    <div class="panel" id="editorPanel" style="display:none;">
+        <div class="panel-header">
+            <div class="panel-number">2</div>
+            <div class="panel-title">Editor de Acordes</div>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+                <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px;" onclick="openPaletteModal()" id="btnPalette">
+                    🎹 Paleta
+                </button>
+                <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px;" onclick="toggleTextEdit()" id="btnTextEdit">
+                    ✏️ Editar texto
+                </button>
+            </div>
+        </div>
+
+        <div class="editor-info-bar" id="editorInfoBar">
+            <span>🖱️</span>
+            <span>
+                <strong>Clic</strong> en un carácter → escribe el acorde o elige de la paleta flotante ·
+                <strong>Alt+1…8</strong> para insertar acordes de la paleta ·
+                <strong>Arrastra</strong> un acorde para moverlo ·
+                <strong>Escape</strong> para borrar
+            </span>
+        </div>
+
+        <!-- Paleta de acordes (barra visual) -->
+        <div class="palette-bar" id="paletteBar">
+            <span class="palette-label">🎹 Paleta</span>
+            <span id="paletteChips" style="display:flex;flex-wrap:wrap;gap:5px;align-items:center;"></span>
+            <span class="palette-chip-empty" onclick="openPaletteModal()" style="margin-left:4px;">+ Configurar</span>
+        </div>
+
+        <!-- Panel inline de edición de texto -->
+        <div id="textEditPanel" style="display:none; margin-bottom:16px;">
+            <div style="background:#fffbf0;border:1px solid #fde68a;border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:#92400e;margin-bottom:10px;display:flex;align-items:flex-start;gap:8px;">
+                <span>⚠️</span>
+                <span>Edita la letra libremente. Puedes agregar espacios al final de una línea para tener posiciones extra donde colocar acordes. Los acordes ya colocados se conservarán en las posiciones que sigan siendo válidas.</span>
+            </div>
+            <textarea id="inlineTextEdit" class="lyrics-textarea" style="height:180px;margin-top:0;"></textarea>
+            <div style="display:flex;gap:8px;margin-top:8px;">
+                <button class="btn btn-success" style="flex:1;justify-content:center;" onclick="applyTextEdit()">✓ Aplicar cambios</button>
+                <button class="btn btn-secondary" style="flex:0 0 auto;" onclick="cancelTextEdit()">Cancelar</button>
+            </div>
+        </div>
+
+        <div id="interactiveEditor"></div>
+
+        <div class="divider"></div>
+        <button class="btn btn-success btn-full" onclick="exportChordPro()">
+            Finalizar → Exportar
+        </button>
+    </div>
+
+    <!-- PANEL 3: Exportar -->
+    <div class="panel" id="exportPanel" style="display:none;">
+        <div class="panel-header">
+            <div class="panel-number">3</div>
+            <div class="panel-title">Exportar</div>
+            <div class="panel-desc">Elige el formato de salida</div>
+        </div>
+
+        <textarea id="outputChordPro" readonly placeholder="El código ChordPro aparecerá aquí..."></textarea>
+
+        <div class="export-grid">
+            <button class="btn btn-dark btn-full" style="grid-column:span 2;margin-top:0;" onclick="copyToClipboard()">
+                📋 Copiar código ChordPro
+            </button>
+            <div class="export-card" onclick="downloadTXT()">
+                <span class="icon">📄</span>
+                <span class="label">.PRO / .TXT</span>
+                <span class="sub">Formato ChordPro puro</span>
+            </div>
+            <div class="export-card" onclick="downloadDOC()">
+                <span class="icon">📝</span>
+                <span class="label">Word (.doc)</span>
+                <span class="sub">Para editar e imprimir</span>
+            </div>
+            <div class="export-card" onclick="printPDF()" style="grid-column:span 2;border-color:#dc2626;background:#fef2f2;">
+                <span class="icon">🖨️</span>
+                <span class="label">Imprimir / Guardar PDF</span>
+                <span class="sub">Vista limpia lista para imprimir</span>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+        <button class="btn btn-secondary" onclick="backToEditor()" style="width:100%;justify-content:center;font-size:13px;">
+            ← Volver al editor de acordes
+        </button>
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="app-footer no-print">
+    <span>Hecho con</span>
+    <span class="footer-heart">♥</span>
+    <span>por</span>
+    <a href="https://instagram.com/jotady" target="_blank" rel="noopener" class="instagram-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+        </svg>
+        @jotady
+    </a>
+    <span>para la IASD · 2026</span>
+</footer>
+
+<div id="previewPrint"></div>
+<div class="toast" id="toast"></div>
+
+<!-- PALETTE MODAL -->
+<div id="paletteModal" class="palette-modal-overlay" style="display:none;" onclick="closePaletteModal(event)">
+    <div class="palette-modal" onclick="event.stopPropagation()">
+        <h3>🎹 Configurar paleta de acordes</h3>
+        <p>Guarda hasta 8 acordes de acceso rápido. Úsalos con clic en el popup flotante o con <strong>Alt+1</strong> a <strong>Alt+8</strong>.</p>
+
+        <div id="keySuggestionArea"></div>
+
+        <div id="paletteSlots"></div>
+
+        <div style="display:flex;gap:8px;margin-top:20px;">
+            <button class="btn btn-success" style="flex:1;justify-content:center;" onclick="savePalette()">✓ Guardar paleta</button>
+            <button class="btn btn-secondary" onclick="closePaletteModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ════════════════════════
+// CHORD PALETTE SYSTEM
+// ════════════════════════
+
+// Círculo armónico básico por tonalidad
+const HARMONIC_CIRCLES = {
+    // Mayores
+    'C':  ['C','Dm','Em','F','G','Am','Bdim'],
+    'G':  ['G','Am','Bm','C','D','Em','F#dim'],
+    'D':  ['D','Em','F#m','G','A','Bm','C#dim'],
+    'A':  ['A','Bm','C#m','D','E','F#m','G#dim'],
+    'E':  ['E','F#m','G#m','A','B','C#m','D#dim'],
+    'B':  ['B','C#m','D#m','E','F#','G#m','A#dim'],
+    'F':  ['F','Gm','Am','Bb','C','Dm','Edim'],
+    'Bb': ['Bb','Cm','Dm','Eb','F','Gm','Adim'],
+    'Eb': ['Eb','Fm','Gm','Ab','Bb','Cm','Ddim'],
+    'Ab': ['Ab','Bbm','Cm','Db','Eb','Fm','Gdim'],
+    'F#': ['F#','G#m','A#m','B','C#','D#m','E#dim'],
+    // Menores
+    'Am': ['Am','Bdim','C','Dm','Em','F','G'],
+    'Em': ['Em','F#dim','G','Am','Bm','C','D'],
+    'Bm': ['Bm','C#dim','D','Em','F#m','G','A'],
+    'Dm': ['Dm','Edim','F','Gm','Am','Bb','C'],
+    'Gm': ['Gm','Adim','Bb','Cm','Dm','Eb','F'],
+    'Cm': ['Cm','Ddim','Eb','Fm','Gm','Ab','Bb'],
+    'Fm': ['Fm','Gdim','Ab','Bbm','Cm','Db','Eb'],
+    'F#m':['F#m','G#dim','A','Bm','C#m','D','E'],
+    'C#m':['C#m','D#dim','E','F#m','G#m','A','B'],
+};
+
+// Estado de la paleta (8 slots)
+let paletteChords = JSON.parse(localStorage.getItem('chordpro_palette') || 'null')
+    || ['', '', '', '', '', '', '', ''];
+
+// Referencia al acorde actualmente enfocado
+let _focusedChord = null;
+let _palettePopup = null;
+
+/**
+ * Guarda paleta en localStorage y re-renderiza la barra.
+ */
+function savePaletteToStorage() {
+    try { localStorage.setItem('chordpro_palette', JSON.stringify(paletteChords)); } catch(e) {}
+}
+
+/**
+ * Renderiza los chips en la barra de paleta del editor.
+ */
+function renderPaletteBar() {
+    const container = document.getElementById('paletteChips');
+    if (!container) return;
+    container.innerHTML = '';
+    paletteChords.forEach((ch, i) => {
+        if (!ch) return;
+        const chip = document.createElement('span');
+        chip.className = 'palette-chip';
+        chip.innerHTML = `${ch}<span class="chip-key">Alt+${i+1}</span>`;
+        chip.title = `Insertar ${ch} (Alt+${i+1})`;
+        chip.onclick = () => insertFromPalette(ch);
+        container.appendChild(chip);
+    });
+}
+
+/**
+ * Inserta un acorde de la paleta en el campo enfocado.
+ */
+function insertFromPalette(chordText) {
+    if (_focusedChord) {
+        _focusedChord.textContent = chordText;
+        updateChordState(_focusedChord);
+        _focusedChord.focus();
+    }
+    closePopup();
+}
+
+/**
+ * Abre el popup flotante de paleta junto al acorde enfocado.
+ */
+function openPalettePopup(anchorEl) {
+    closePopup();
+    const filled = paletteChords.filter(c => c.trim());
+    if (!filled.length) return; // paleta vacía, no mostrar
+
+    const popup = document.createElement('div');
+    popup.className = 'chord-palette-popup';
+    popup.id = 'chordPalettePopup';
+
+    filled.forEach((ch, i) => {
+        const idx = paletteChords.indexOf(ch); // slot real
+        const chip = document.createElement('div');
+        chip.className = 'palette-popup-chip';
+        chip.innerHTML = `${ch}<span class="ppc-key">Alt+${idx+1}</span>`;
+        chip.onmousedown = e => { e.preventDefault(); insertFromPalette(ch); };
+        popup.appendChild(chip);
+    });
+
+    document.body.appendChild(popup);
+    _palettePopup = popup;
+
+    // Posicionar encima del anchorEl
+    const rect = anchorEl.getBoundingClientRect();
+    const pw = popup.offsetWidth || 200;
+    let left = rect.left;
+    let top  = rect.top - popup.offsetHeight - 8;
+    if (top < 8) top = rect.bottom + 8;
+    if (left + pw > window.innerWidth - 8) left = window.innerWidth - pw - 8;
+    popup.style.left = left + 'px';
+    popup.style.top  = top  + 'px';
+}
+
+function closePopup() {
+    if (_palettePopup) { _palettePopup.remove(); _palettePopup = null; }
+}
+
+// Cerrar popup al hacer clic fuera — pero NO durante un mousedown en un char-container
+// (ese caso lo maneja el propio flujo de activateEdit / drag)
+document.addEventListener('mousedown', e => {
+    if (!_palettePopup) return;
+    // Si el clic es dentro del popup, dejar que onmousedown del chip lo maneje
+    if (_palettePopup.contains(e.target)) return;
+    // Si el clic es en un char-container o chord-display, NO cerrar ahora —
+    // el flujo de clic/drag lo hará en el momento correcto
+    if (e.target.closest && e.target.closest('.char-container')) return;
+    closePopup();
+});
+
+/**
+ * Hook que se llama cuando un chord-display recibe foco.
+ * Lo registramos globalmente para poder insertarle desde paleta/atajos.
+ */
+function onChordFocus(chordEl) {
+    _focusedChord = chordEl;
+    openPalettePopup(chordEl);
+}
+
+function onChordBlur(chordEl) {
+    // Dar tiempo para que el popup reciba el mousedown antes de cerrarse
+    setTimeout(() => {
+        if (!_palettePopup) return;
+        const active = document.activeElement;
+        // Mantener abierto si el foco fue al popup o a otro chord-display
+        if (_palettePopup.contains(active)) return;
+        if (active && active.classList && active.classList.contains('chord-display')) return;
+        closePopup();
+    }, 200);
+}
+
+// ── Atajos Alt+1…8 ──
+document.addEventListener('keydown', e => {
+    if (!e.altKey) return;
+    const n = parseInt(e.key);
+    if (n >= 1 && n <= 8) {
+        e.preventDefault();
+        const ch = paletteChords[n - 1];
+        if (ch && _focusedChord) {
+            _focusedChord.textContent = ch;
+            updateChordState(_focusedChord);
+            _focusedChord.focus();
+            closePopup();
+        }
+    }
+});
+
+// ════════════════════════
+// PALETTE MODAL
+// ════════════════════════
+
+function openPaletteModal() {
+    // Detectar tonalidad del rawLyrics
+    const raw = document.getElementById('rawLyrics').value;
+    const keyMatch = raw.match(/\{key:\s*([^}]+)\}/i);
+    const detectedKey = keyMatch ? keyMatch[1].trim() : null;
+
+    // Sugerencias de acorde por tonalidad
+    const sugArea = document.getElementById('keySuggestionArea');
+    if (detectedKey && HARMONIC_CIRCLES[detectedKey]) {
+        const circle = HARMONIC_CIRCLES[detectedKey];
+        sugArea.innerHTML = `
+            <div class="key-suggestion-row">
+                <p>🎼 Tonalidad detectada: <strong>${detectedKey}</strong> — Círculo armónico sugerido:</p>
+                ${circle.map((ch,i) => `<span class="key-sug-chip" onclick="fillPaletteFromSuggestion(${i},'${ch}')">${ch}</span>`).join('')}
+                <span class="key-sug-chip" style="background:var(--surface-2);color:var(--ink-soft);border-style:dashed;" onclick="loadFullCircle('${detectedKey}')">Cargar todo →</span>
+            </div>`;
+    } else {
+        sugArea.innerHTML = `<div style="font-size:12px;color:var(--ink-muted);margin-bottom:14px;">💡 Agrega <code>{key: Am}</code> en la estructura para ver sugerencias del círculo armónico.</div>`;
+    }
+
+    // Slots
+    const slotsDiv = document.getElementById('paletteSlots');
+    slotsDiv.innerHTML = '';
+    for (let i = 0; i < 8; i++) {
+        slotsDiv.innerHTML += `
+            <div class="palette-slot">
+                <span class="palette-slot-key">Alt+${i+1}</span>
+                <input class="palette-slot-input" id="pslot_${i}"
+                    value="${paletteChords[i] || ''}"
+                    placeholder="vacío"
+                    maxlength="12"
+                    autocomplete="off" spellcheck="false" />
+            </div>`;
+    }
+
+    document.getElementById('paletteModal').style.display = 'flex';
+}
+
+function closePaletteModal(e) {
+    if (e && e.target !== document.getElementById('paletteModal')) return;
+    document.getElementById('paletteModal').style.display = 'none';
+}
+
+function savePalette() {
+    for (let i = 0; i < 8; i++) {
+        const inp = document.getElementById(`pslot_${i}`);
+        paletteChords[i] = inp ? inp.value.trim() : '';
+    }
+    savePaletteToStorage();
+    renderPaletteBar();
+    document.getElementById('paletteModal').style.display = 'none';
+    showToast('✓ Paleta guardada', 'success');
+}
+
+function fillPaletteFromSuggestion(idx, chord) {
+    const inp = document.getElementById(`pslot_${idx}`);
+    if (inp) inp.value = chord;
+}
+
+function loadFullCircle(key) {
+    const circle = HARMONIC_CIRCLES[key] || [];
+    for (let i = 0; i < 8; i++) {
+        const inp = document.getElementById(`pslot_${i}`);
+        if (inp) inp.value = circle[i] || '';
+    }
+}
+
+// ════════════════════════
+// TOAST
+// ════════════════════════
+function showToast(msg, type = '') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `toast ${type} show`;
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ════════════════════════
+// STEPS
+// ════════════════════════
+function setStep(n) {
+    [1,2,3].forEach(i => {
+        const d = document.getElementById(`dot${i}`);
+        d.className = 'step-dot' + (i < n ? ' done' : i === n ? ' active' : '');
+    });
+}
+
+// ════════════════════════
+// METADATOS — INPUT INLINE
+// ════════════════════════
+let _activeMetaType = null;
+
+function activateMetaInput(type, label, icon, triggerBtn) {
+    // Si ya estaba abierto el mismo, cerrar
+    if (_activeMetaType === type) { cancelMetaInput(); return; }
+    _activeMetaType = type;
+
+    const area = document.getElementById('metaInputArea');
+    area.innerHTML = `
+        <div class="meta-input-row" id="metaRow">
+            <span class="meta-input-label">${icon} ${label}</span>
+            <input class="meta-input-field" id="metaInp" type="text"
+                placeholder="Escribe aquí y pulsa Enter…" autocomplete="off" />
+            <button class="btn-confirm" onclick="confirmMetaInput('${type}')" title="Confirmar (Enter)">✓</button>
+            <button class="btn-cancel-meta" onclick="cancelMetaInput()" title="Cancelar (Esc)">×</button>
+        </div>`;
+
+    const inp = document.getElementById('metaInp');
+    inp.focus();
+    inp.addEventListener('keydown', e => {
+        if (e.key === 'Enter')  { e.preventDefault(); confirmMetaInput(type); }
+        if (e.key === 'Escape') { e.preventDefault(); cancelMetaInput(); }
+    });
+}
+
+function confirmMetaInput(type) {
+    const inp = document.getElementById('metaInp');
+    if (!inp) return;
+    const val = inp.value.trim();
+    if (val) {
+        const tx = document.getElementById('rawLyrics');
+        const tag = `{${type}: ${val}}`;
+        const lines = tx.value.split('\n');
+
+        // Metadatos conocidos que van al bloque inicial
+        const META_TYPES = ['title','artist','key','tempo'];
+        let lastMetaIdx = -1;
+        for (let i = 0; i < lines.length; i++) {
+            const isMetaLine = META_TYPES.some(m => lines[i].trim().startsWith(`{${m}:`));
+            if (isMetaLine) lastMetaIdx = i;
+            else break; // primera línea no-metadato detiene búsqueda
+        }
+        lines.splice(lastMetaIdx + 1, 0, tag);
+        tx.value = lines.join('\n');
+        showToast(`✓ ${label_for(type)} añadido`, 'success');
+    }
+    cancelMetaInput();
+}
+
+function label_for(type) {
+    return {title:'Título', artist:'Artista', key:'Tonalidad', tempo:'Tempo'}[type] || type;
+}
+
+function cancelMetaInput() {
+    document.getElementById('metaInputArea').innerHTML = '';
+    _activeMetaType = null;
+}
+
+// ════════════════════════
+// SECCIONES — insertar en cursor
+// ════════════════════════
+function insertSectionTag(tag) {
+    const tx = document.getElementById('rawLyrics');
+    tx.focus();
+    const start = tx.selectionStart;
+    const end   = tx.selectionEnd;
+    const before = tx.value.slice(0, start);
+    const after  = tx.value.slice(end);
+    const nl = (before.length > 0 && !before.endsWith('\n')) ? '\n' : '';
+    tx.value = before + nl + tag + '\n' + after;
+    const newPos = before.length + nl.length + tag.length + 1;
+    tx.selectionStart = tx.selectionEnd = newPos;
+}
+
+function insertCommentTag() {
+    const val = prompt('Texto del comentario (ej: Intro, Solo, 2x, Outro):');
+    if (val && val.trim()) insertSectionTag(`{comment: ${val.trim()}}`);
+}
+
+// ════════════════════════
+// HELPER: texto limpio de acorde
+// ════════════════════════
+function cleanChord(el) {
+    // Eliminar caracteres invisibles que contentEditable puede dejar
+    return el.textContent.replace(/[\u200B\u200C\u200D\uFEFF\u00A0\u0020]+/g, s => {
+        // Mantener espacios reales solo si son parte del nombre del acorde (ej: "C maj7")
+        // En acordes normales no hay espacios, así que los recortamos de bordes
+        return s;
+    }).replace(/^[\s\u200B\u200C\u200D\uFEFF\u00A0]+|[\s\u200B\u200C\u200D\uFEFF\u00A0]+$/g, '');
+}
+
+function updateChordState(chord) {
+    const txt = cleanChord(chord);
+    if (txt.length > 0) {
+        chord.classList.add('has-chord');
+        chord.draggable = true;
+        // Volver a false tras editar: próximo mousedown decidirá si editar o draguear
+        if (document.activeElement !== chord) chord.contentEditable = 'false';
+    } else {
+        chord.classList.remove('has-chord');
+        chord.draggable = false;
+        chord.contentEditable = 'false';
+        if (chord.textContent !== '') chord.textContent = '';
+    }
+}
+
+// ════════════════════════
+// DETECCIÓN AUTOMÁTICA DE CHORDPRO
+// ════════════════════════
+
+/**
+ * Detecta si el texto tiene acordes ChordPro ([Am], [G], etc.)
+ * y muestra un banner informativo.
+ */
+function detectChordPro() {
+    const raw = document.getElementById('rawLyrics').value;
+    const banner = document.getElementById('detectBanner');
+    const btn    = document.getElementById('btnBuildEditor');
+    const hasChords = /\[[A-Ga-g][^\]]{0,10}\]/.test(raw);
+
+    if (hasChords) {
+        const count = (raw.match(/\[[A-Ga-g][^\]]{0,10}\]/g) || []).length;
+        banner.innerHTML = `
+            <div class="detect-banner">
+                <span class="detect-badge">ChordPro detectado</span>
+                <span>Se encontraron <strong>${count} acorde${count !== 1 ? 's' : ''}</strong> en el texto.
+                Al continuar, se cargarán automáticamente en el editor para que puedas editarlos.</span>
+            </div>`;
+        btn.textContent = '✏️ Editar ChordPro existente';
+    } else {
+        banner.innerHTML = '';
+        btn.textContent = 'Continuar → Colocar Acordes';
+    }
+}
+
+/**
+ * Parsea una línea ChordPro con acordes y devuelve:
+ * { lyric: string, chords: Map<charIndex, chordName> }
+ *
+ * Ejemplo: "[Am]Puedo [E]Confiar" →
+ *   lyric: "Puedo Confiar"
+ *   chords: { 0 → "Am", 6 → "E" }
+ */
+function parseChordProLine(line) {
+    const chords = new Map();
+    let lyric = '';
+    let charIdx = 0;
+    // Regex que captura [acorde] o texto normal
+    const re = /\[([^\]]+)\]|([^\[]+)/g;
+    let match;
+    while ((match = re.exec(line)) !== null) {
+        if (match[1] !== undefined) {
+            // Es un acorde: anótalo en la posición actual del lyric
+            chords.set(charIdx, match[1]);
+        } else {
+            // Es texto
+            lyric += match[2];
+            charIdx += match[2].length;
+        }
+    }
+    return { lyric, chords };
+}
+
+// ════════════════════════
+// EDITAR TEXTO SIN PERDER ACORDES
+// ════════════════════════
+
+/**
+ * Snapshot: extrae el texto actual del editor línea por línea
+ * (sin acordes, solo la letra y los tags).
+ */
+function snapshotEditorText() {
+    const editor = document.getElementById('interactiveEditor');
+    return Array.from(editor.children).map(line => {
+        if (line.classList.contains('editor-tag')) return line.textContent.trim();
+        // Línea de letras: solo los lyric-chars
+        return Array.from(line.querySelectorAll('.lyric-char'))
+                    .map(el => el.textContent).join('');
+    }).join('\n');
+}
+
+/**
+ * Snapshot: extrae los acordes actuales como array de objetos
+ * [{ lineIdx, charIdx, chord }]
+ */
+function snapshotChords() {
+    const editor = document.getElementById('interactiveEditor');
+    const chords = [];
+    Array.from(editor.children).forEach((line, lineIdx) => {
+        if (line.classList.contains('editor-tag')) return;
+        line.querySelectorAll('.char-container').forEach(con => {
+            const chEl = con.querySelector('.chord-display');
+            const c = chEl ? cleanChord(chEl) : '';
+            if (c) chords.push({ lineIdx, charIdx: parseInt(con.dataset.index), chord: c });
+        });
+    });
+    return chords;
+}
+
+function toggleTextEdit() {
+    const panel = document.getElementById('textEditPanel');
+    const btn   = document.getElementById('btnTextEdit');
+    const isOpen = panel.style.display !== 'none';
+
+    if (isOpen) {
+        cancelTextEdit();
+    } else {
+        panel.style.display = 'block';
+        btn.textContent = '× Cerrar edición de texto';
+        btn.style.borderColor = 'var(--primary)';
+        btn.style.color = 'var(--primary)';
+        // Cargar texto actual (sin acordes)
+        document.getElementById('inlineTextEdit').value = snapshotEditorText();
+        document.getElementById('inlineTextEdit').focus();
+    }
+}
+
+function cancelTextEdit() {
+    document.getElementById('textEditPanel').style.display = 'none';
+    const btn = document.getElementById('btnTextEdit');
+    btn.textContent = '✏️ Editar texto';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+}
+
+/**
+ * Aplica el texto editado al editor, conservando los acordes
+ * que siguen siendo compatibles (misma línea, misma o menor longitud).
+ */
+function applyTextEdit() {
+    const newText   = document.getElementById('inlineTextEdit').value;
+    const oldChords = snapshotChords(); // guardar acordes antes de reconstruir
+
+    // Actualizar el rawLyrics con el nuevo texto para que buildEditorFromText lo use
+    // pero primero necesitamos reconstruir SIN acordes inline
+    const rawLines  = newText.split('\n');
+
+    // Reconstruir el editor con el nuevo texto
+    const editor = document.getElementById('interactiveEditor');
+    editor.innerHTML = '';
+
+    rawLines.forEach((line, lineIdx) => {
+        const lineDiv = document.createElement('div');
+
+        if (line.trim().startsWith('{')) {
+            lineDiv.className = 'editor-tag';
+            lineDiv.textContent = line;
+        } else if (line.trim() === '') {
+            lineDiv.className = 'editor-line';
+            lineDiv.style.minHeight = '16px';
+            lineDiv.innerHTML = '&nbsp;';
+        } else {
+            lineDiv.className = 'editor-line';
+            Array.from(line).forEach((char, charIdx) => {
+                const container = makeCharContainer(char, charIdx);
+                lineDiv.append(container);
+            });
+        }
+        editor.append(lineDiv);
+    });
+
+    // Restaurar acordes que siguen siendo válidos
+    let restored = 0, dropped = 0;
+    oldChords.forEach(({ lineIdx, charIdx, chord }) => {
+        const lines = editor.children;
+        if (lineIdx >= lines.length) { dropped++; return; }
+        const line = lines[lineIdx];
+        const containers = line.querySelectorAll('.char-container');
+        const con = Array.from(containers).find(c => parseInt(c.dataset.index) === charIdx);
+        if (con) {
+            const chEl = con.querySelector('.chord-display');
+            chEl.textContent = chord;
+            chEl.contentEditable = 'false';
+            updateChordState(chEl);
+            restored++;
+        } else {
+            dropped++;
+        }
+    });
+
+    cancelTextEdit();
+
+    const msg = dropped > 0
+        ? `✓ Texto actualizado · ${restored} acorde${restored!==1?'s':''} conservado${restored!==1?'s':''} · ${dropped} eliminado${dropped!==1?'s':''} (posición ya no existe)`
+        : `✓ Texto actualizado · ${restored} acorde${restored!==1?'s':''} conservado${restored!==1?'s':''}`;
+    showToast(msg, 'success');
+}
+
+/**
+ * Crea un char-container completo.
+ *
+ * INTERACCIÓN:
+ *   • Clic (mouseup sin movimiento)  → activa edición + abre popup paleta
+ *   • Clic sostenido + mover ≥5px   → drag con fantasma visual, SIN edición ni popup
+ *     Al soltar: el acorde "cae" en el carácter destino.
+ */
+function makeCharContainer(char, charIdx) {
+    const container = document.createElement('span');
+    container.className = 'char-container';
+    container.dataset.index = charIdx;
+
+    const chord = document.createElement('span');
+    chord.className = 'chord-display';
+    chord.contentEditable = 'false';   // se activa solo en clic confirmado
+    chord.spellcheck = false;
+
+    const lyric = document.createElement('span');
+    lyric.className = 'lyric-char';
+    lyric.textContent = char;
+
+    // ── Activar edición (clic confirmado) ──
+    function activateEdit() {
+        chord.contentEditable = 'true';
+        chord.focus();
+        // El popup se abre en onfocus → doFocusLogic
+    }
+
+    chord.onfocus = () => {
+        if (chord.contentEditable !== 'true') return;
+        _focusedChord = chord;
+        setTimeout(() => {
+            // Seleccionar todo el texto del acorde
+            const range = document.createRange();
+            range.selectNodeContents(chord);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            // Abrir popup — ya estamos en mouseup así que el killer global no interfiere
+            openPalettePopup(chord);
+        }, 0);
+    };
+
+    chord.onkeydown = e => {
+        if (e.key === 'Enter')  { e.preventDefault(); chord.blur(); }
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            chord.textContent = '';
+            updateChordState(chord);
+            chord.blur();
+        }
+    };
+
+    chord.oninput = () => updateChordState(chord);
+    chord.onblur  = () => {
+        updateChordState(chord);
+        if (!window._dragSrc) chord.contentEditable = 'false';
+        onChordBlur(chord);
+    };
+
+    // ══════════════════════════════════════════════════
+    // MOUSEDOWN: decide entre CLIC y DRAG
+    // ══════════════════════════════════════════════════
+    container.addEventListener('mousedown', e => {
+        if (e.button !== 0) return;
+
+        const hasTxt = cleanChord(chord).length > 0;
+        const startX = e.clientX, startY = e.clientY;
+        let isDrag = false;
+        let ghost  = null;
+
+        // Evitar que el browser active el caret de contentEditable prematuramente
+        e.preventDefault();
+
+        function createGhost(x, y) {
+            ghost = document.createElement('div');
+            ghost.textContent = cleanChord(chord);
+            ghost.style.cssText = `
+                position: fixed;
+                z-index: 9999;
+                pointer-events: none;
+                font-family: 'DM Mono', monospace;
+                font-size: 14px;
+                font-weight: 700;
+                color: white;
+                background: var(--chord-color, #c84b2f);
+                padding: 3px 8px;
+                border-radius: 5px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+                transform: translate(-50%, -110%);
+                white-space: nowrap;
+                opacity: 0.92;
+                cursor: grabbing;
+            `;
+            ghost.style.left = x + 'px';
+            ghost.style.top  = y + 'px';
+            document.body.appendChild(ghost);
+            // Cambiar cursor global a grabbing
+            document.body.style.cursor = 'grabbing';
+        }
+
+        function moveGhost(x, y) {
+            if (!ghost) return;
+            ghost.style.left = x + 'px';
+            ghost.style.top  = y + 'px';
+        }
+
+        function removeGhost() {
+            if (ghost) { ghost.remove(); ghost = null; }
+            document.body.style.cursor = '';
+        }
+
+        // Highlight del container destino actual
+        let _lastHighlight = null;
+        function highlightDest(x, y) {
+            // Ocultar ghost para poder usar elementFromPoint
+            if (ghost) ghost.style.display = 'none';
+            const el = document.elementFromPoint(x, y);
+            if (ghost) ghost.style.display = '';
+            const dest = el && el.closest('.char-container');
+            if (dest !== _lastHighlight) {
+                if (_lastHighlight) _lastHighlight.classList.remove('drag-over');
+                if (dest && dest !== container) dest.classList.add('drag-over');
+                _lastHighlight = dest !== container ? dest : null;
+            }
+        }
+
+        function clearHighlight() {
+            if (_lastHighlight) { _lastHighlight.classList.remove('drag-over'); _lastHighlight = null; }
+        }
+
+        function onMove(mv) {
+            const dx = mv.clientX - startX, dy = mv.clientY - startY;
+            if (!isDrag && Math.sqrt(dx*dx + dy*dy) >= 5 && hasTxt) {
+                isDrag = true;
+                window._dragSrc = chord;
+                chord.classList.add('dragging');
+                createGhost(mv.clientX, mv.clientY);
+            }
+            if (isDrag) {
+                moveGhost(mv.clientX, mv.clientY);
+                highlightDest(mv.clientX, mv.clientY);
+            }
+        }
+
+        function onUp(upEv) {
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp);
+
+            if (isDrag) {
+                // ── Soltar el drag ──
+                chord.classList.remove('dragging');
+                clearHighlight();
+                removeGhost();
+                window._dragSrc = null;
+                window._wasDragging = true;
+
+                // Buscar destino bajo el cursor
+                const el = document.elementFromPoint(upEv.clientX, upEv.clientY);
+                const destContainer = el && el.closest('.char-container');
+                if (destContainer && destContainer !== container) {
+                    const destChord = destContainer.querySelector('.chord-display');
+                    if (destChord) {
+                        const srcTxt = cleanChord(chord);
+                        const dstTxt = cleanChord(destChord);
+                        // Animar el destino brevemente
+                        destContainer.classList.add('drag-landed');
+                        setTimeout(() => destContainer.classList.remove('drag-landed'), 400);
+                        chord.textContent     = dstTxt;
+                        destChord.textContent = srcTxt;
+                        chord.contentEditable     = 'false';
+                        destChord.contentEditable = 'false';
+                        updateChordState(chord);
+                        updateChordState(destChord);
+                    }
+                }
+                chord.contentEditable = 'false';
+
+            } else {
+                // ── Clic limpio: activar edición ──
+                window._wasDragging = false;
+                activateEdit();
+            }
+        }
+
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup',   onUp);
+    });
+
+    container.append(chord, lyric);
+    return container;
+}
+
+// ════════════════════════════════════════════════
+// NORMALIZADOR DE TAGS CHORDPRO
+// ════════════════════════════════════════════════
+//
+// Traduce CUALQUIER forma abreviada o alternativa al tag canónico
+// que el resto del sistema ya conoce. Se aplica:
+//   1. Al cargar el editor (buildEditor)
+//   2. Al importar un ChordPro existente
+//
+// Referencia completa de aliases soportados:
+//   Secciones:  soc/eoc, sov/eov, sob/eob, sot/eot
+//   Comentarios: c:, ci:, cb:, comment_italic:, comment_box:
+//   Metadatos:  t:, st:, k:, np, col:, colb
+// ════════════════════════════════════════════════
+
+function normalizeTag(line) {
+    const t = line.trim();
+    if (!t.startsWith('{') || !t.endsWith('}')) return line;
+
+    // Extraer el interior de las llaves
+    const inner = t.slice(1, -1).trim();
+    const lc    = inner.toLowerCase();
+
+    // ── Mapa de secciones: alias → tag canónico ────────────────
+    const sectionMap = {
+        'soc':              '{start_of_chorus}',
+        'start_of_chorus':  '{start_of_chorus}',
+        'eoc':              '{end_of_chorus}',
+        'end_of_chorus':    '{end_of_chorus}',
+        'sov':              '{start_of_verse}',
+        'start_of_verse':   '{start_of_verse}',
+        'eov':              '{end_of_verse}',
+        'end_of_verse':     '{end_of_verse}',
+        'sob':              '{start_of_bridge}',
+        'start_of_bridge':  '{start_of_bridge}',
+        'eob':              '{end_of_bridge}',
+        'end_of_bridge':    '{end_of_bridge}',
+        'sot':              '{start_of_tab}',
+        'start_of_tab':     '{start_of_tab}',
+        'eot':              '{end_of_tab}',
+        'end_of_tab':       '{end_of_tab}',
+        'np':               '{new_page}',
+        'new_page':         '{new_page}',
+        'colb':             '{column_break}',
+        'column_break':     '{column_break}',
+    };
+
+    // Caso 1: tag de sección sin valor, ej: {soc} {eoc} {start_of_chorus}
+    if (sectionMap[lc]) return sectionMap[lc];
+
+    // ── Tags con valor (key: value) ────────────────────────────
+    const colonIdx = inner.indexOf(':');
+    if (colonIdx === -1) return line; // sin valor ni reconocido → dejar igual
+
+    const key = inner.slice(0, colonIdx).trim().toLowerCase();
+    const val = inner.slice(colonIdx + 1).trim();
+
+    // Caso 2: tag de sección CON etiqueta, ej: {soc: CORO UP} {start_of_chorus: Estribillo}
+    // → se expande a {comment: etiqueta} + {start_of_section}
+    // Los tags de "fin" con valor son inusuales pero los manejamos igual (solo la sección)
+    const sectionWithLabel = {
+        'soc':              '{start_of_chorus}',
+        'start_of_chorus':  '{start_of_chorus}',
+        'sov':              '{start_of_verse}',
+        'start_of_verse':   '{start_of_verse}',
+        'sob':              '{start_of_bridge}',
+        'start_of_bridge':  '{start_of_bridge}',
+        'sot':              '{start_of_tab}',
+        'start_of_tab':     '{start_of_tab}',
+        // Tags de fin con valor (raro pero posible)
+        'eoc':              '{end_of_chorus}',
+        'end_of_chorus':    '{end_of_chorus}',
+        'eov':              '{end_of_verse}',
+        'end_of_verse':     '{end_of_verse}',
+        'eob':              '{end_of_bridge}',
+        'end_of_bridge':    '{end_of_bridge}',
+        'eot':              '{end_of_tab}',
+        'end_of_tab':       '{end_of_tab}',
+    };
+    if (sectionWithLabel[key]) {
+        // Devuelve ARRAY de dos líneas: el label como comentario + la directiva de sección
+        return [`{comment: ${val}}`, sectionWithLabel[key]];
+    }
+
+    // Caso 3: metadato o comentario con valor
+    const keyMap = {
+        // Metadatos
+        't':               'title',
+        'title':           'title',
+        'st':              'subtitle',
+        'subtitle':        'subtitle',
+        'artist':          'artist',
+        'composer':        'composer',
+        'lyricist':        'lyricist',
+        'k':               'key',
+        'key':             'key',
+        'tempo':           'tempo',
+        'duration':        'duration',
+        'capo':            'capo',
+        // Comentarios
+        'c':               'comment',
+        'comment':         'comment',
+        'ci':              'comment_italic',
+        'comment_italic':  'comment_italic',
+        'cb':              'comment_box',
+        'comment_box':     'comment_box',
+        // Formato
+        'col':             'columns',
+        'columns':         'columns',
+        'textfont':        'textfont',
+        'chordfont':       'chordfont',
+        'textsize':        'textsize',
+        'chordsize':       'chordsize',
+    };
+
+    const canonical = keyMap[key];
+    if (!canonical) return line; // desconocido → dejar como está
+    return `{${canonical}: ${val}}`;
+}
+
+/**
+ * Normaliza todas las líneas de un texto ChordPro.
+ * normalizeTag puede devolver un string, un array de strings, o la línea original.
+ */
+function normalizeChordPro(text) {
+    const result = [];
+    text.split('\n').forEach(line => {
+        const normalized = normalizeTag(line);
+        if (Array.isArray(normalized)) {
+            // Un tag se expandió en múltiples líneas (ej: {soc: CORO} → comment + section)
+            normalized.forEach(l => result.push(l));
+        } else {
+            result.push(normalized);
+        }
+    });
+    return result.join('\n');
+}
+
+// ════════════════════════
+// CONSTRUIR EDITOR
+// ════════════════════════
+function buildEditor() {
+    const rawInput = document.getElementById('rawLyrics').value;
+    if (!rawInput.trim()) { showToast('⚠️ Primero pega la letra.', 'error'); return; }
+
+    // Normalizar todos los tags antes de procesar (aliases → forma canónica)
+    const raw = normalizeChordPro(rawInput);
+    const lines  = raw.split('\n');
+    const editor = document.getElementById('interactiveEditor');
+    editor.innerHTML = '';
+
+    lines.forEach(line => {
+        const lineDiv = document.createElement('div');
+
+        if (line.trim().startsWith('{')) {
+            lineDiv.className = 'editor-tag';
+            lineDiv.textContent = line;
+
+        } else if (line.trim() === '') {
+            lineDiv.className = 'editor-line';
+            lineDiv.style.minHeight = '16px';
+            lineDiv.innerHTML = '&nbsp;';
+
+        } else {
+            lineDiv.className = 'editor-line';
+
+            // Detectar si la línea tiene acordes ChordPro embebidos
+            const hasInlineChords = /\[[A-Ga-g][^\]]{0,10}\]/.test(line);
+            const parsed    = hasInlineChords ? parseChordProLine(line) : null;
+            const displayLine = parsed ? parsed.lyric : line;
+            const preChords   = parsed ? parsed.chords : new Map();
+
+            Array.from(displayLine).forEach((char, charIdx) => {
+                const container = makeCharContainer(char, charIdx);
+                // Pre-cargar acorde si viene de un ChordPro importado
+                if (preChords.has(charIdx)) {
+                    const chEl = container.querySelector('.chord-display');
+                    chEl.textContent = preChords.get(charIdx);
+                    chEl.classList.add('has-chord');
+                    chEl.draggable = true;
+                    chEl.contentEditable = 'false'; // drag-safe por defecto
+                }
+                lineDiv.append(container);
+            });
+        }
+
+        editor.append(lineDiv);
+    });
+
+    document.getElementById('editorPanel').style.display = 'block';
+    renderPaletteBar();
+    setStep(2);
+    setTimeout(() => document.getElementById('editorPanel').scrollIntoView({ behavior:'smooth', block:'start' }), 50);
+}
+
+// ════════════════════════
+// EXPORTAR
+// ════════════════════════
+function exportChordPro() {
+    const editor = document.getElementById('interactiveEditor');
+    let chordPro = '';
+
+    Array.from(editor.children).forEach(line => {
+        if (line.classList.contains('editor-tag')) {
+            chordPro += line.textContent.trim() + '\n';
+        } else {
+            let cpLine = '';
+            line.querySelectorAll('.char-container').forEach(con => {
+                const chEl = con.querySelector('.chord-display');
+                const c = chEl ? cleanChord(chEl) : '';
+                const l = con.querySelector('.lyric-char')?.textContent || '';
+                if (c) cpLine += `[${c}]`;
+                cpLine += l;
+            });
+            chordPro += cpLine + '\n';
+        }
+    });
+
+    document.getElementById('outputChordPro').value = chordPro.trim();
+    document.getElementById('previewPrint').innerHTML = buildHTMLPreview(editor);
+    document.getElementById('exportPanel').style.display = 'block';
+    setStep(3);
+    setTimeout(() => document.getElementById('exportPanel').scrollIntoView({ behavior:'smooth', block:'start' }), 50);
+}
+
+// ════════════════════════
+// HTML LIMPIO PARA PDF/WORD
+// ════════════════════════
+function buildHTMLPreview(editor) {
+    // ─────────────────────────────────────────────────────────────────
+    // SISTEMA DE ALINEACIÓN POR POSICIÓN ABSOLUTA
+    //
+    // En lugar de construir dos líneas de texto paralelas (acordes + letra)
+    // y rellenar con espacios, usamos `position:relative` en el contenedor
+    // de línea y `position:absolute` en cada acorde, anclado al offset X
+    // exacto del carácter en la fuente monoespaciada.
+    //
+    // Esto garantiza que:
+    //   • El acorde siempre empieza exactamente sobre su carácter ancla.
+    //   • Acordes largos se extienden hacia la derecha sin desplazar nada.
+    //   • Ningún acorde afecta la posición de otro.
+    //
+    // El único prerequisito es conocer el ancho de un carácter en la fuente
+    // usada. Para 'Courier New' a 14px = 8.4px por carácter (razón 0.6).
+    // Lo calculamos dinámicamente creando un span oculto de medición,
+    // pero como el HTML se genera como string, usamos el valor estándar
+    // de referencia: ch = font-size × 0.6  →  14px × 0.6 = 8.4px
+    // Para el Word exportado usamos 11pt × 0.6 = 6.6pt.
+    // ─────────────────────────────────────────────────────────────────
+
+    const FONT_SIZE_PX  = 14;      // tamaño de letra en px
+    const CHAR_W_PX     = 8.4;     // ancho de 1ch en Courier New a 14px (= 14 * 0.6)
+    const CHORD_SIZE_PX = 13;      // tamaño de los acordes en px
+    const LINE_HEIGHT   = 42;      // altura total de una línea con acordes (chord + letra)
+    const CHORD_ROW_H   = 20;      // altura reservada para la fila de acordes
+
+    function tagVal(raw, key) {
+        const re = new RegExp('^\\{' + key + ':\\s*', 'i');
+        return raw.replace(re, '').replace(/\}$/, '').trim();
+    }
+
+    function buildTagHTML(raw) {
+        const r = raw.toLowerCase();
+
+        // ── Metadatos ────────────────────────────────────────────────
+        if (r.startsWith('{title:')) {
+            const v = tagVal(raw,'title');
+            return `<h1 style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#111;margin:0 0 4px;padding-bottom:8px;border-bottom:2px solid #c84b2f;">${esc(v)}</h1>`;
+        }
+        if (r.startsWith('{subtitle:')) {
+            const v = tagVal(raw,'subtitle');
+            return `<p style="font-family:Georgia,serif;font-size:14px;font-style:italic;color:#444;margin:0 0 4px;">${esc(v)}</p>`;
+        }
+        if (r.startsWith('{artist:')) {
+            const v = tagVal(raw,'artist');
+            return `<p style="font-family:Georgia,serif;font-size:13px;font-style:italic;color:#555;margin:0 0 3px;">${esc(v)}</p>`;
+        }
+        if (r.startsWith('{composer:') || r.startsWith('{lyricist:')) {
+            const isComp = r.startsWith('{composer:');
+            const v = tagVal(raw, isComp ? 'composer' : 'lyricist');
+            return `<p style="font-family:sans-serif;font-size:10px;color:#888;margin:0 0 2px;">${isComp?'Compositor':'Letrista'}: ${esc(v)}</p>`;
+        }
+        if (r.startsWith('{key:')) {
+            const v = tagVal(raw,'key');
+            return `<p style="font-family:sans-serif;font-size:11px;color:#888;margin:0 0 18px;">Tonalidad: <strong style="color:#c84b2f;">${esc(v)}</strong></p>`;
+        }
+        if (r.startsWith('{tempo:')) {
+            const v = tagVal(raw,'tempo');
+            return `<p style="font-family:sans-serif;font-size:11px;color:#888;margin:-12px 0 18px;">Tempo: <strong>${esc(v)} BPM</strong></p>`;
+        }
+        if (r.startsWith('{capo:')) {
+            const v = tagVal(raw,'capo');
+            return `<p style="font-family:sans-serif;font-size:11px;color:#888;margin:-10px 0 14px;">Cejilla: traste <strong>${esc(v)}</strong></p>`;
+        }
+        if (r.startsWith('{duration:')) {
+            const v = tagVal(raw,'duration');
+            return `<p style="font-family:sans-serif;font-size:10px;color:#aaa;margin:-8px 0 12px;">Duración: ${esc(v)}</p>`;
+        }
+
+        // ── Comentarios ──────────────────────────────────────────────
+        if (r.startsWith('{comment:')) {
+            const v = tagVal(raw,'comment');
+            return `<p style="font-family:sans-serif;font-size:10px;font-weight:700;color:#777;margin:20px 0 5px;padding-left:8px;border-left:2px solid #ccc;">${esc(v)}</p>`;
+        }
+        if (r.startsWith('{comment_italic:')) {
+            const v = tagVal(raw,'comment_italic');
+            return `<p style="font-family:sans-serif;font-size:10px;font-style:italic;color:#888;margin:14px 0 4px;padding-left:8px;">${esc(v)}</p>`;
+        }
+        if (r.startsWith('{comment_box:')) {
+            const v = tagVal(raw,'comment_box');
+            return `<p style="font-family:sans-serif;font-size:10px;font-weight:700;color:#333;margin:14px 0 6px;padding:5px 10px;border:1px solid #999;border-radius:3px;display:inline-block;">${esc(v)}</p>`;
+        }
+
+        // ── Secciones ────────────────────────────────────────────────
+        if (raw === '{start_of_chorus}')
+            return `<div style="margin:16px 0 0;padding-left:14px;border-left:3px solid #c84b2f;"><p style="font-family:sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#c84b2f;margin:0 0 8px;">CORO</p>`;
+        if (raw === '{end_of_chorus}')   return `</div><div style="height:12px;"></div>`;
+        if (raw === '{start_of_verse}')  return `<div style="margin:14px 0 0;">`;
+        if (raw === '{end_of_verse}')    return `</div><div style="height:8px;"></div>`;
+        if (raw === '{start_of_bridge}')
+            return `<div style="margin:16px 0 0;padding-left:14px;border-left:3px solid #2563eb;"><p style="font-family:sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#2563eb;margin:0 0 8px;">PUENTE</p>`;
+        if (raw === '{end_of_bridge}')   return `</div><div style="height:12px;"></div>`;
+        if (raw === '{start_of_tab}')
+            return `<div style="margin:14px 0;padding:8px 12px;border:1px solid #ddd;border-radius:4px;"><p style="font-family:sans-serif;font-size:9px;font-weight:700;text-transform:uppercase;color:#888;margin:0 0 6px;">TAB</p>`;
+        if (raw === '{end_of_tab}')      return `</div><div style="height:10px;"></div>`;
+        if (raw === '{new_page}')        return `<div style="page-break-after:always;"></div>`;
+        if (raw === '{column_break}')    return `<div style="break-before:column;"></div>`;
+        // Ignorar silenciosamente: columns, textfont, chordfont, textsize, chordsize, define, etc.
+        return '';
+    }
+
+    function buildLyricLineHTML(line) {
+        const containers = line.querySelectorAll('.char-container');
+        if (!containers.length) return `<div style="height:10px;"></div>`;
+
+        // Recolectar letras y acordes con sus posiciones de carácter
+        let lyricText = '';
+        const chordEntries = []; // [{charIdx, chord}]
+
+        containers.forEach((con, i) => {
+            const chEl = con.querySelector('.chord-display');
+            const c = chEl ? cleanChord(chEl) : '';
+            const l = con.querySelector('.lyric-char')?.textContent || '';
+            lyricText += l;
+            if (c) chordEntries.push({ charIdx: i, chord: c });
+        });
+
+        const hasChords = chordEntries.length > 0;
+
+        // Calcular la anchura total de la línea en px (al menos el texto de letra)
+        // más el posible desbordamiento del último acorde
+        let minWidth = lyricText.length * CHAR_W_PX;
+        if (hasChords) {
+            chordEntries.forEach(({ charIdx, chord }) => {
+                const rightEdge = charIdx * CHAR_W_PX + chord.length * CHAR_W_PX * (CHORD_SIZE_PX / FONT_SIZE_PX);
+                if (rightEdge > minWidth) minWidth = rightEdge;
+            });
+        }
+
+        const totalH = hasChords ? LINE_HEIGHT : Math.round(FONT_SIZE_PX * 1.55);
+
+        let html = `<div style="position:relative;page-break-inside:avoid;height:${totalH}px;min-width:${Math.ceil(minWidth)}px;margin-bottom:4px;">`;
+
+        // Fila de acordes (posición absoluta, anclada a la X del carácter)
+        if (hasChords) {
+            chordEntries.forEach(({ charIdx, chord }) => {
+                const leftPx = charIdx * CHAR_W_PX;
+                html += `<span style="position:absolute;left:${leftPx.toFixed(1)}px;top:0;`
+                      + `font-family:'Courier New',monospace;font-size:${CHORD_SIZE_PX}px;`
+                      + `font-weight:700;color:#c84b2f;white-space:nowrap;line-height:${CHORD_ROW_H}px;">`
+                      + `${esc(chord)}</span>`;
+            });
+        }
+
+        // Línea de letra (debajo de los acordes, posición absoluta también)
+        const lyricTop = hasChords ? CHORD_ROW_H : 0;
+        html += `<span style="position:absolute;left:0;top:${lyricTop}px;`
+              + `font-family:'Courier New',monospace;font-size:${FONT_SIZE_PX}px;`
+              + `white-space:pre;line-height:${Math.round(FONT_SIZE_PX * 1.55)}px;">`
+              + `${esc(lyricText)}</span>`;
+
+        html += `</div>`;
+        return html;
+    }
+
+    let html = `<div style="font-family:'Courier New',monospace;max-width:720px;margin:24px auto;color:#111;font-size:${FONT_SIZE_PX}px;line-height:1.3;">`;
+
+    Array.from(editor.children).forEach(line => {
+        const raw = line.textContent.trim();
+
+        if (line.classList.contains('editor-tag')) {
+            html += buildTagHTML(raw);
+            return;
+        }
+
+        html += buildLyricLineHTML(line);
+    });
+
+    html += `</div>`;
+    return html;
+}
+
+function esc(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ════════════════════════
+// DESCARGA
+// ════════════════════════
+function copyToClipboard() {
+    const out = document.getElementById('outputChordPro');
+    out.select();
+    document.execCommand('copy');
+    showToast('✓ Código ChordPro copiado', 'success');
+}
+
+function downloadTXT() {
+    const content = document.getElementById('outputChordPro').value;
+    if (!content) { showToast('⚠️ Primero finaliza el ChordPro.', 'error'); return; }
+    triggerDownload(new Blob([content], {type:'text/plain;charset=utf-8'}), 'cancion.pro');
+    showToast('✓ Archivo .pro descargado');
+}
+
+function downloadDOC() {
+    const editor = document.getElementById('interactiveEditor');
+    if (!editor || !editor.children.length) { showToast('⚠️ Primero finaliza el ChordPro.', 'error'); return; }
+
+    const wordBody = buildWordHTML(editor);
+    const doc = `<html xmlns:office="urn:schemas-microsoft-com:office:office"
+        xmlns:word="urn:schemas-microsoft-com:office:word"
+        xmlns="http://www.w3.org/TR/REC-html40">
+        <head><meta charset="utf-8">
+        <style>
+            @page WordSection1 { margin:2cm 2.5cm; }
+            div.Section1 { page:WordSection1; }
+            body { font-family:'Courier New',monospace; font-size:11pt; background:white; }
+            div, p, h1, h2, h3, span { background:none !important; mso-shading:none !important; }
+        </style></head>
+        <body><div class="Section1">${wordBody}</div></body></html>`;
+    triggerDownload(new Blob(['\ufeff', doc], {type:'application/msword;charset=utf-8'}), 'cancion.doc');
+    showToast('✓ Word descargado');
+}
+
+/**
+ * Genera HTML compatible con Word para acordes alineados.
+ *
+ * Word ignora position:absolute, así que usamos el método de
+ * dos líneas de texto monoespaciadas construidas carácter por carácter:
+ *
+ *   Línea de acordes:  "     C           D - Em         "
+ *   Línea de letra:    "Maranata, maranata,  ya muy..."
+ *
+ * El algoritmo correcto: recorremos todos los char-containers en orden.
+ * Para cada posición i, si hay acorde lo ponemos en la posición i de la
+ * línea de acordes y avanzamos max(len_acorde, 1) posiciones. Si el acorde
+ * es más largo que el carácter ancla, los siguientes espacios de la línea
+ * de acordes quedan "consumidos" por ese acorde, pero la letra sigue
+ * carácter por carácter — la diferencia se compensa con espacios en la
+ * línea de acordes para mantener el alineamiento correcto.
+ */
+function buildWordHTML(editor) {
+    let html = `<div style="font-family:'Courier New',monospace;font-size:11pt;color:#111;">`;
+
+    function wordTag(raw) {
+        const r = raw.toLowerCase();
+        function wv(key) {
+            const re = new RegExp('^\\{' + key + ':\\s*', 'i');
+            return raw.replace(re, '').replace(/\}$/, '').trim();
+        }
+        if (r.startsWith('{title:'))     return `<h1 style="font-family:Georgia,serif;font-size:18pt;font-weight:700;color:#111;margin:0 0 4pt;padding-bottom:4pt;border-bottom:2pt solid #c84b2f;">${esc(wv('title'))}</h1>`;
+        if (r.startsWith('{subtitle:'))  return `<p style="font-family:Georgia,serif;font-size:12pt;font-style:italic;color:#444;margin:0 0 3pt;">${esc(wv('subtitle'))}</p>`;
+        if (r.startsWith('{artist:'))    return `<p style="font-family:Georgia,serif;font-size:10pt;font-style:italic;color:#555;margin:0 0 2pt;">${esc(wv('artist'))}</p>`;
+        if (r.startsWith('{composer:'))  return `<p style="font-family:Arial,sans-serif;font-size:8pt;color:#888;margin:0 0 2pt;">Compositor: ${esc(wv('composer'))}</p>`;
+        if (r.startsWith('{lyricist:'))  return `<p style="font-family:Arial,sans-serif;font-size:8pt;color:#888;margin:0 0 2pt;">Letrista: ${esc(wv('lyricist'))}</p>`;
+        if (r.startsWith('{key:'))       return `<p style="font-family:Arial,sans-serif;font-size:9pt;color:#888;margin:0 0 12pt;">Tonalidad: <b style="color:#c84b2f;">${esc(wv('key'))}</b></p>`;
+        if (r.startsWith('{tempo:'))     return `<p style="font-family:Arial,sans-serif;font-size:9pt;color:#888;margin:-8pt 0 12pt;">Tempo: <b>${esc(wv('tempo'))} BPM</b></p>`;
+        if (r.startsWith('{capo:'))      return `<p style="font-family:Arial,sans-serif;font-size:9pt;color:#888;margin:-6pt 0 10pt;">Cejilla: traste <b>${esc(wv('capo'))}</b></p>`;
+        if (r.startsWith('{duration:'))  return `<p style="font-family:Arial,sans-serif;font-size:8pt;color:#aaa;margin:-4pt 0 8pt;">Duración: ${esc(wv('duration'))}</p>`;
+        if (r.startsWith('{comment:'))       return `<p style="font-family:Arial,sans-serif;font-size:8pt;font-weight:700;color:#777;margin:14pt 0 4pt;padding-left:6pt;border-left:2pt solid #ccc;">${esc(wv('comment'))}</p>`;
+        if (r.startsWith('{comment_italic:')) return `<p style="font-family:Arial,sans-serif;font-size:8pt;font-style:italic;color:#888;margin:10pt 0 4pt;padding-left:6pt;">${esc(wv('comment_italic'))}</p>`;
+        if (r.startsWith('{comment_box:'))   return `<p style="font-family:Arial,sans-serif;font-size:8pt;font-weight:700;color:#333;margin:10pt 0 5pt;padding:4pt 8pt;border:1pt solid #999;">${esc(wv('comment_box'))}</p>`;
+        if (raw === '{start_of_chorus}')  return `<div style="margin:10pt 0 0;padding-left:10pt;border-left:3pt solid #c84b2f;"><p style="font-family:Arial,sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:1pt;color:#c84b2f;margin:0 0 5pt;">CORO</p>`;
+        if (raw === '{end_of_chorus}')    return `</div><div style="height:8pt;"></div>`;
+        if (raw === '{start_of_verse}')   return `<div style="margin:10pt 0 0;">`;
+        if (raw === '{end_of_verse}')     return `</div><div style="height:6pt;"></div>`;
+        if (raw === '{start_of_bridge}')  return `<div style="margin:10pt 0 0;padding-left:10pt;border-left:3pt solid #2563eb;"><p style="font-family:Arial,sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;letter-spacing:1pt;color:#2563eb;margin:0 0 5pt;">PUENTE</p>`;
+        if (raw === '{end_of_bridge}')    return `</div><div style="height:8pt;"></div>`;
+        if (raw === '{start_of_tab}')     return `<div style="margin:10pt 0;padding:6pt 10pt;border:1pt solid #ddd;"><p style="font-family:Arial,sans-serif;font-size:7pt;font-weight:700;text-transform:uppercase;color:#888;margin:0 0 4pt;">TAB</p>`;
+        if (raw === '{end_of_tab}')       return `</div><div style="height:8pt;"></div>`;
+        if (raw === '{new_page}')         return `<br clear="all" style="mso-special-character:line-break;page-break-before:always">`;
+        return '';
+    }
+
+    function wordLyricLine(line) {
+        const containers = Array.from(line.querySelectorAll('.char-container'));
+        if (!containers.length) return `<div style="height:6pt;"></div>`;
+
+        // Recolectar pares (lyricChar, chordText) por índice
+        const chars = containers.map(con => ({
+            lyric: con.querySelector('.lyric-char')?.textContent || '',
+            chord: cleanChord(con.querySelector('.chord-display') || {textContent:''})
+        }));
+
+        const hasChords = chars.some(ch => ch.chord);
+        if (!hasChords) {
+            const lyric = chars.map(ch => ch.lyric).join('');
+            return `<div style="white-space:pre;font-size:11pt;line-height:1.4;margin-bottom:1pt;">${esc(lyric)}</div>`;
+        }
+
+        // Construir las dos líneas carácter a carácter.
+        // chordCursor: posición actual en la línea de acordes
+        // lyricCursor: posición actual en la línea de letra
+        // Ambas líneas crecen en paralelo, rellenando con espacios cuando
+        // una va por delante de la otra.
+        let chordRow = '';
+        let lyricRow = '';
+
+        for (let i = 0; i < chars.length; i++) {
+            const { lyric, chord } = chars[i];
+
+            if (chord) {
+                // Asegurarse de que chordRow y lyricRow estén alineados en la posición actual
+                // (lyricRow siempre avanza 1 por carácter; chordRow puede haberse adelantado)
+                const pos = lyricRow.length; // posición actual en ambas líneas
+
+                // Si chordRow es más corto que lyricRow, rellenar chordRow con espacios
+                while (chordRow.length < pos) chordRow += ' ';
+
+                // Poner el acorde en chordRow
+                chordRow += chord;
+
+                // El acorde ocupa max(chord.length, 1) posiciones.
+                // Si el acorde es más largo que 1 carácter, consumir los chars
+                // siguientes de la letra (que quedarán "debajo" del acorde)
+                // añadiéndolos a lyricRow y rellenando chordRow con espacios.
+                lyricRow += lyric;
+
+                if (chord.length > 1) {
+                    // El acorde se extiende sobre los próximos (chord.length - 1) caracteres
+                    // Avanzamos en ambas filas para mantener el alineamiento
+                    let extra = chord.length - 1;
+                    let j = i + 1;
+                    while (extra > 0 && j < chars.length) {
+                        lyricRow += chars[j].lyric;
+                        if (chars[j].chord) {
+                            // Hay otro acorde en esta zona — primero terminar el relleno
+                            // y luego el siguiente ciclo lo manejará
+                            break;
+                        }
+                        // chordRow ya tiene el acorde ocupando este espacio, no añadir nada
+                        extra--;
+                        j++;
+                        i++; // consumir este char-container en el bucle exterior
+                    }
+                }
+            } else {
+                // Sin acorde: añadir espacio a chordRow y carácter a lyricRow
+                // Solo si chordRow no se ha adelantado ya por un acorde previo largo
+                if (chordRow.length <= lyricRow.length) chordRow += ' ';
+                lyricRow += lyric;
+            }
+        }
+
+        // Normalizar longitudes finales
+        while (chordRow.length < lyricRow.length) chordRow += ' ';
+
+        return `<div style="page-break-inside:avoid;margin-bottom:0;">`
+             + `<div style="white-space:pre;font-size:10pt;font-weight:700;color:#c84b2f;line-height:1.3;">${esc(chordRow)}</div>`
+             + `<div style="white-space:pre;font-size:11pt;line-height:1.4;margin-bottom:2pt;">${esc(lyricRow)}</div>`
+             + `</div>`;
+    }
+
+    Array.from(editor.children).forEach(line => {
+        const raw = line.textContent.trim();
+        if (line.classList.contains('editor-tag')) {
+            html += wordTag(raw);
+        } else {
+            html += wordLyricLine(line);
+        }
+    });
+
+    html += `</div>`;
+    return html;
+}
+
+function printPDF() { window.print(); }
+
+function triggerDownload(blob, name) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+}
+
+function backToEditor() {
+    document.getElementById('exportPanel').style.display = 'none';
+    setStep(2);
+    setTimeout(() => document.getElementById('editorPanel').scrollIntoView({ behavior:'smooth', block:'start' }), 50);
+}
+</script>
+</body>
+</html>
