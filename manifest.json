@@ -1,0 +1,36 @@
+{
+  "name": "Cancionero ICentral",
+  "short_name": "Cancionero",
+  "description": "Cancionero digital del Conjunto de Adoración de la IASD Central San Isidro",
+  "start_url": "/cancioneroicentral/",
+  "scope": "/cancioneroicentral/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f7f7f5",
+  "theme_color": "#4f46e5",
+  "lang": "es",
+  "categories": ["music", "education"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='80' fill='%234f46e5'/><text x='256' y='340' font-size='280' text-anchor='middle' fill='white'>🎵</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Abrir Índice",
+      "short_name": "Índice",
+      "description": "Ver todas las canciones",
+      "url": "/cancioneroicentral/?tab=index"
+    },
+    {
+      "name": "Programa del culto",
+      "short_name": "Programa",
+      "description": "Gestionar el programa de hoy",
+      "url": "/cancioneroicentral/?tab=programa"
+    }
+  ]
+}
